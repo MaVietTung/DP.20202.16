@@ -74,7 +74,11 @@ public class PlaceOrderController extends BaseController {
         System.out.println(deliveryInfo.getProvince());
         return deliveryInfo;
     }
-    
+
+
+    //Control coupling do bên gọi phương thức phải hiểu info gồm những key và value nào,
+    //Khi code trong phương thức này thay đổi kéo theo phía gọi phương thức này cũng phải
+    //Thay đổi theo
     /**
    * The method validates the info
    * @param info
