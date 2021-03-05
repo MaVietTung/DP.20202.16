@@ -213,6 +213,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         if (observable instanceof MediaHandler) update((MediaHandler) observable);
     }
 
+    //Stamp coupling - Tham số mediaHandler chỉ sử dụng getMedia và getRequestQuantity
     private void update(MediaHandler mediaHandler) {
         int requestQuantity = mediaHandler.getRequestQuantity();
         Media media = mediaHandler.getMedia();
