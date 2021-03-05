@@ -6,6 +6,7 @@ package common.exception;;
  * 
  * @author nguyenlm
  */
+// Data coupling: Phương thức contruction AimsException truyền tham số message vào phương thức contructions của lớp RuntimeException
 public class AimsException extends RuntimeException {
 
     public AimsException() {

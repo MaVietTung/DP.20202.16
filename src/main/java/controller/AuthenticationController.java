@@ -28,7 +28,7 @@ public class AuthenticationController extends BaseController {
             return true;
         }
     }
-
+// Common Coupling: truy cập vào dữ liệu static của lớp SessionInformation
     public User getMainUser() throws ExpiredSessionException {
         if (SessionInformation.mainUser == null || SessionInformation.expiredTime == null || SessionInformation.expiredTime.isBefore(LocalDateTime.now())) {
             logout();
@@ -48,7 +48,7 @@ public class AuthenticationController extends BaseController {
             throw new FailLoginException();
         }
     }
-
+// Common Coupling: Thay đổi dữ liêu static của lớp SessionInformation
     public void logout() {
         SessionInformation.mainUser = null;
         SessionInformation.expiredTime = null;
@@ -61,6 +61,7 @@ public class AuthenticationController extends BaseController {
      * @param message - plain text as {@link String String}.
      * @return cipher text as {@link String String}.
      */
+
     private String md5(String message) {
         String digest = null;
         try {

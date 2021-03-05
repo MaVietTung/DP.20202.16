@@ -21,7 +21,7 @@ public class Book extends Media {
     public Book() throws SQLException{
 
     }
-
+    //Data COupling
     public Book(int id, String title, String category, int price, int quantity, String type, String author,
             String coverType, String publisher, Date publishDate, int numOfPages, String language,
             String bookCategory) throws SQLException{

@@ -22,7 +22,7 @@ public class ResultScreenHandler extends BaseScreenHandler {
 
 	private String result;
 	private String message;
-
+//Stamp Coupling
 	public ResultScreenHandler(Stage stage, String screenPath, Map<String, String> response) throws IOException {
 		super(stage, screenPath);
 		try {
@@ -37,7 +37,7 @@ public class ResultScreenHandler extends BaseScreenHandler {
 		}
 	}
 
-
+//Stamp Coupling
 	protected void setupData(Object dto) throws Exception {
 		Map<String, String> response = (Map<String, String>) dto;
 		resultLabel.setText(response.get("RESULT"));
