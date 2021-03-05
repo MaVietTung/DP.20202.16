@@ -21,7 +21,7 @@ public class DeliveryInfo {
         this.distanceCalculator = distanceCalculator;
     }
 
-    //Chưa rõ loại coupling do truyền order nhưng không dùng
+    //Stamp coupling - Tham số order không được sử dụng
     public int calculateShippingFee(Order order) {
         int distance = distanceCalculator.calculateDistance(address, province);
         return (int) (distance * 1.2);

@@ -5,6 +5,7 @@ package entity.shipping;
  */
 public class ShippingConfigs {
 
+    // Common coupling - Biến có thể dùng bất cứ đâu
     public static String[] PROVINCES = {
             "Bắc Giang", 	"Bắc Kạn", 			"Cao Bằng", 	"Hà Giang", 	"Lạng Sơn", 	"Phú Thọ",
             "Quảng Ninh", 	"Thái Nguyên", 		"Tuyên Quang", 	"Yên Bái", 		"Điện Biên", 	"Hòa Bình",
@@ -18,5 +19,6 @@ public class ShippingConfigs {
             "Hậu Giang", 	"Kiên Giang", 		"Long An", 		"Sóc Trăng", 	"Tiền Giang", 	"Trà Vinh",
             "Vĩnh Long", 	"Cần Thơ" };
 
+    // Common coupling - Biến có thể dùng bất cứ đâu
     public static int[] RUSH_SUPPORT_PROVINCES_INDEX = {22, 48};
 }
