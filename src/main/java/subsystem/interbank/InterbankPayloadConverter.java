@@ -22,6 +22,7 @@ public class InterbankPayloadConverter {
      * @param contents
      * @return
      */
+    //Data Coupling
     String convertToRequestPayload(CreditCard card, int amount, String contents) {
         Map<String, Object> transaction = new MyMap();
 

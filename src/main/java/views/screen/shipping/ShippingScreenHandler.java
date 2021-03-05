@@ -51,7 +51,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 	private ComboBox<String> province;
 
 	private Order order;
-
+//Stamp Coupling
 	public ShippingScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
 		super(stage, screenPath);
 		try {

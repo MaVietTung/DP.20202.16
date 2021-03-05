@@ -30,7 +30,7 @@ public class ViewsConfig {
     public static float PERCENT_VAT = 10;
 
     public static Font REGULAR_FONT = Font.font("Segoe UI", FontWeight.NORMAL, FontPosture.REGULAR, 24);
-
+    //Data Coupling
     public static String getCurrencyFormat(int num) {
         Locale vietnam = new Locale("vi", "VN");
         NumberFormat defaultFormat = NumberFormat.getCurrencyInstance(vietnam);

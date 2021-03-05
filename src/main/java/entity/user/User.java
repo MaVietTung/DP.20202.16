@@ -7,7 +7,7 @@ public class User {
     private String email;
     private String address;
     private String phone;
-
+    //Data Coupling
     public User(int id, String name, String email, String address, String phone) {
         this.id = id;
         this.name = name;
@@ -35,7 +35,7 @@ public class User {
     public String getName() {
         return this.name;
     }
-
+    //Data Coupling
     public void setusername(String name) {
         this.name = name;
     }
@@ -43,7 +43,7 @@ public class User {
     public String getEmail() {
         return this.email;
     }
-
+    //Data Coupling
     public void setEmail(String email) {
         this.email = email;
     }
@@ -51,7 +51,7 @@ public class User {
     public String getAddress() {
         return this.address;
     }
-
+    //Data Coupling
     public void setAddress(String address) {
         this.address = address;
     }
@@ -59,7 +59,7 @@ public class User {
     public String getPhone() {
         return this.phone;
     }
-
+    //Data Coupling
     public void setPhone(String phone) {
         this.phone = phone;
     }

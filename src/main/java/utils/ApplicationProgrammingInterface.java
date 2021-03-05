@@ -21,7 +21,7 @@ public class ApplicationProgrammingInterface {
 
 	public static DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	private static Logger LOGGER = Utils.getLogger(Utils.class.getName());
-
+	//Data Coupling
 	public static String get(String url, String token) throws Exception {
 		LOGGER.info("Request URL: " + url + "\n");
 		HttpURLConnection conn = setupConnection(url);
@@ -38,7 +38,7 @@ public class ApplicationProgrammingInterface {
 		LOGGER.info("Respone Info: " + respone.substring(0, respone.length() - 1).toString());
 		return respone.substring(0, respone.length() - 1).toString();
 	}
-
+	//Data Coupling
 	public static String post(String url, String data) throws IOException {
 		allowMethods("PATCH");
 		HttpURLConnection conn = setupConnection(url);
@@ -63,7 +63,7 @@ public class ApplicationProgrammingInterface {
 		LOGGER.info("Respone Info: " + response.toString());
 		return response.toString();
 	}
-
+	//Data Coupling
 	private static HttpURLConnection setupConnection(String url) throws IOException {
 		HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
 		conn.setDoInput(true);
@@ -71,7 +71,7 @@ public class ApplicationProgrammingInterface {
 		conn.setRequestProperty("Content-Type", "application/json");
 		return conn;
 	}
-
+	//Data Coupling
 	private static void allowMethods(String... methods) {
 		try {
 			Field methodsField = HttpURLConnection.class.getDeclaredField("methods");

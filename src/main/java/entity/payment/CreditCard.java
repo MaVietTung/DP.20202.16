@@ -9,7 +9,7 @@ public class CreditCard {
     private String owner;
     private String dateExpired;
     protected int cvvCode;
-
+    //Data COupling
     public CreditCard(String cardCode, String owner, String dateExpired, int cvvCode) {
         this.cardCode = cardCode;
         this.owner = owner;
