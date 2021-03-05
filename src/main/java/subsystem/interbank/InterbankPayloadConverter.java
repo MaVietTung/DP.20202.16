@@ -48,6 +48,7 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
+    // control coupling do su dung errorCode de xac dinh exception
     PaymentTransaction extractPaymentTransaction(String responseText) {
         MyMap response = convertJSONResponse(responseText);
 
