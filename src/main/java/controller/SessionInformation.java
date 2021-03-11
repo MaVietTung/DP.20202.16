@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
  */
 public class SessionInformation {
 
+    // Common coupling - Biến có thể dùng bất cứ đâu
     public static User mainUser;
     public static Cart cartInstance = new Cart();
     public static LocalDateTime expiredTime;

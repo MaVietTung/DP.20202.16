@@ -13,6 +13,7 @@ public class AIMSDB {
 	private static Logger LOGGER = Utils.getLogger(Connection.class.getName());
 	private static Connection connect;
 	// TODO: refactor Utils -> limit connections
+    // Common coupling - Phương thức có thể truy cập bất cứ đâu
     public static Connection getConnection() {
         if (connect != null) return connect;
         try {
