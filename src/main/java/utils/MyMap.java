@@ -62,6 +62,7 @@ public class MyMap extends LinkedHashMap<String, Object> {
 	 * @throws IllegalAccessException
 	 * @throws IllegalArgumentException
 	 */
+	//Stamp Coupling
 	public static Map<String, Object> toMyMap(Object obj) throws IllegalArgumentException, IllegalAccessException {
 		Map<String, Object> map = new MyMap();
 		List<Field> fields = new ArrayList<>();
@@ -130,6 +131,7 @@ public class MyMap extends LinkedHashMap<String, Object> {
 	 * @return the term as {@link MyMap MyMap}
 	 * @throws IllegalArgumentException
 	 */
+	//Data Coupling
 	public static MyMap toMyMap(String str, int idx) throws IllegalArgumentException {
 		if (str == null || str.length() < 2 || str.charAt(idx) != '{') {
 			throw new IllegalArgumentException("Cannot resolve the input.");

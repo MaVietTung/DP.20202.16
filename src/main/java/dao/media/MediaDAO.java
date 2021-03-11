@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * @author
  */
+// LOgical Cohesion
 public class MediaDAO {
 
     public List getAllMedia() throws SQLException {
@@ -31,7 +32,7 @@ public class MediaDAO {
         }
         return medium;
     }
-
+    //Data COupling
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM Media ;";
         Statement stm = AIMSDB.getConnection().createStatement();
@@ -50,7 +51,7 @@ public class MediaDAO {
         return null;
     }
 
-
+    //Data COupling
     public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();
         if (value instanceof String){

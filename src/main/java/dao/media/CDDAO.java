@@ -14,6 +14,7 @@ import java.util.Date;
 public class CDDAO extends MediaDAO {
 
     @Override
+    //Data COupling
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM "+
                 "aims.CD " +
