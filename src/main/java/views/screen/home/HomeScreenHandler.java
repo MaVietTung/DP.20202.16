@@ -93,7 +93,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     }
 //Stamp
     protected void setupData(Object dto) throws Exception {
-        setBController(new HomeController());Coupling
+        setBController(new HomeController());
         this.authenticationController = new AuthenticationController();
         try{
             List medium = getBController().getAllMedia();

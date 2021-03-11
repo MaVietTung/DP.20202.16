@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * @author
  */
+// LOgical Cohesion
 public class MediaDAO {
 
     public List getAllMedia() throws SQLException {
