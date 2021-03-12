@@ -9,7 +9,7 @@ import views.screen.ViewsConfig;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+//Communicational Cohesion: Cac phuong thuc co su dung cac thuoc tinh chung de thuc hien luong thuc thi cua minh
 public class Order {
 
     private int shippingFees;
