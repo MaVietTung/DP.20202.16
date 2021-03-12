@@ -6,7 +6,7 @@ import java.util.List;
 
 import common.exception.MediaNotAvailableException;
 import entity.media.Media;
-
+//Functional Cohesion: Cac phuong thuc deu thuc hien cung mot muc dich co quan he mat thiet voi nhau
 public class Cart {
     
     private List<CartItem> lstCartItem;
@@ -60,7 +60,7 @@ public class Cart {
         if (!allAvailable) throw new MediaNotAvailableException("Some media not available");
     }
 
-    //Stamp coupling do tham số đầu vào là media nưng chỉ sử dụng mỗi id
+    //Control coupling: do tham số đầu vào là media thay doi thi luong phuong thuc thay doi theo
     public CartItem checkMediaInCart(Media media){
         for (CartItem cartItem : lstCartItem) {
             if (cartItem.getMedia().getId() == media.getId()) return cartItem;

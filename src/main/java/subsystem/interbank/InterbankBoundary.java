@@ -4,7 +4,7 @@ import common.exception.UnrecognizedException;
 import utils.ApplicationProgrammingInterface;
 
 public class InterbankBoundary {
-	//Data Coupling
+	//Data COupling: DUng tham so de thuc hien luong thuc thi
 	String query(String url, String data) {
 		String response = null;
 		try {

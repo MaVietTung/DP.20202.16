@@ -13,7 +13,7 @@ import java.util.Date;
  * @author
  */
 public class UserDAO {
-    //Data COupling
+    //COntrol Coupling: tham so email , encryptedPassword thay doi thi luong thuc hien phuong thuc cung thay doi theo
     public User authenticate(String email, String encryptedPassword) throws SQLException {
         String sql = "SELECT * FROM User " +
                 "where email = '" + email + "' and encrypted_password = '" + encryptedPassword + "'";

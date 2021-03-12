@@ -15,7 +15,7 @@ public class CD extends Media {
     public CD() throws SQLException{
 
     }
-    //Data COupling
+    //Data COupling: DUng tham so de thuc hien luong thuc thi
     public CD(int id, String title, String category, int price, int quantity, String type, String artist,
             String recordLabel, String musicType, Date releasedDate) throws SQLException{
         super(id, title, category, price, quantity, type);
