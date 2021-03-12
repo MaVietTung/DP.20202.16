@@ -50,6 +50,7 @@ public class InterbankPayloadConverter {
      * @return
      */
     // control coupling do su dung errorCode de xac dinh exception
+    // coincidental cohesion: read the response from interbank server do not relate to InterbankConverter module
     PaymentTransaction extractPaymentTransaction(String responseText) {
         MyMap response = convertJSONResponse(responseText);
 
@@ -116,6 +117,7 @@ public class InterbankPayloadConverter {
      * @author hieudm
      * @return the current time as {@link String String}.
      */
+    // Coincidental Cohesion: getToday do not relate to InterbankConverter module
     private String getToday() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
