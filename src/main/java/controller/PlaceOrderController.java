@@ -21,7 +21,9 @@ import java.util.regex.Pattern;
  * This class controls the flow of place order usecase in our AIMS project
  * @author nguyenlm
  */
+
 // Concidental cohesion: co nhieu phuong thuc ma muc dich duoc su dung khong lien he mat thiet voi nhau
+
 public class PlaceOrderController extends BaseController {
 
     /**
@@ -77,6 +79,9 @@ public class PlaceOrderController extends BaseController {
         return deliveryInfo;
     }
 
+
+    //Các phương thức validate bị coincidental cohesion vì các phương thức này không liên quan gì đến class
+    //Cần tách ra thành các hàm trong class xử lý String
 
     //Control coupling do bên gọi phương thức phải hiểu info gồm những key và value nào,
     //Khi code trong phương thức này thay đổi kéo theo phía gọi phương thức này cũng phải
