@@ -22,6 +22,12 @@ public class ApplicationProgrammingInterface {
 	public static DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	private static Logger LOGGER = Utils.getLogger(Utils.class.getName());
 	//Data Coupling
+	/**
+	 * Procedural cohesion,
+	 * cac doan code co lien quan ve thu tu thuc hien, 
+	 * khong co lien ket ve chuc nang,
+	 * thiet lap request -> doc du lieu tu response
+	 */
 	public static String get(String url, String token) throws Exception {
 		LOGGER.info("Request URL: " + url + "\n");
 		HttpURLConnection conn = setupConnection(url);
@@ -39,6 +45,10 @@ public class ApplicationProgrammingInterface {
 		return respone.substring(0, respone.length() - 1).toString();
 	}
 	//Data Coupling
+	/**
+	 * Procedural cohesion,
+	 * tuong tu nhu phuong thuc get
+	 */
 	public static String post(String url, String data) throws IOException {
 		allowMethods("PATCH");
 		HttpURLConnection conn = setupConnection(url);
