@@ -33,6 +33,10 @@ public class PopupScreen extends BaseScreenHandler {
         return popup;
     }
     // Data Coupling
+    /**
+     * Communicational cohesion,
+     * cac phuong thuc success, error, loading hoat dong tren cung mot dau vao
+     */
     public static void success(String message) throws IOException{
         popup(message, ViewsConfig.IMAGE_PATH + "/" + "tickgreen.png", true)
                 .show(true);
