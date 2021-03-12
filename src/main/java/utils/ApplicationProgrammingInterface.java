@@ -74,6 +74,11 @@ public class ApplicationProgrammingInterface {
 		return response.toString();
 	}
 	//Data Coupling
+	/**
+	 * Functional cohesion,
+	 * phuong thuc setupConnection duoc tach rieng nham muc dich tao connection
+	 * cho ca phuong thuc get va post
+	 */
 	private static HttpURLConnection setupConnection(String url) throws IOException {
 		HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
 		conn.setDoInput(true);

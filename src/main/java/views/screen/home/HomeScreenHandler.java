@@ -70,6 +70,11 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     private List homeItems;
     private AuthenticationController authenticationController;
 
+    /**
+     * Functional cohesion,
+     * tach rieng cac phuong thuc setupData va setupFunctionality
+     * de khoi tao du lieu va khoi tao chuc nang cho doi tuong cua lop
+     */
     public HomeScreenHandler(Stage stage, String screenPath) throws IOException{
         super(stage, screenPath);
         try {
