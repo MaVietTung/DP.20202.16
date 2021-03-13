@@ -21,6 +21,12 @@ import subsystem.InterbankSubsystem;
  * @author hieud
  *
  */
+
+/*
+ * Coincidental cohesion, lớp PaymentController có 3 phương thức không liên quan tới nhau,
+ * phương thức getExpirationDate(Date date) nên được để sang một lớp khác vì chỉ xử lý đến kiểm tra ngày tháng
+ * phương thức emptyCart() thì nên để bên ViewCartController xử lý, vì chỉ có Cart mới có quyền quản lý việc làm trống giỏ hàng
+ */
 public class PaymentController extends BaseController {
 
 	/**

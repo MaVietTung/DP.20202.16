@@ -70,6 +70,11 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     private List homeItems;
     private AuthenticationController authenticationController;
 
+    /**
+     * Functional cohesion,
+     * tach rieng cac phuong thuc setupData va setupFunctionality
+     * de khoi tao du lieu va khoi tao chuc nang cho doi tuong cua lop
+     */
     public HomeScreenHandler(Stage stage, String screenPath) throws IOException{
         super(stage, screenPath);
         try {
@@ -91,9 +96,9 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     public HomeController getBController() {
         return (HomeController) super.getBController();
     }
-//Stamp
+//Stamp Coupling
     protected void setupData(Object dto) throws Exception {
-        setBController(new HomeController());Coupling
+        setBController(new HomeController());
         this.authenticationController = new AuthenticationController();
         try{
             List medium = getBController().getAllMedia();

@@ -18,6 +18,12 @@ import java.util.Objects;
 /**
  * @author
  */
+
+/**
+ * Coincidental cohesion, do có phương thức md5(String message) dùng để mã hóa chuỗi theo hàm băm md5
+ * không liên quan đến các phương thức khác phục vụ cho mục đích quản lý trong lớp AuthenticationController
+ * không phục vụ cho tính năng của lớp này
+ */
 public class AuthenticationController extends BaseController {
 
     public boolean isAnonymousSession() {
@@ -28,7 +34,7 @@ public class AuthenticationController extends BaseController {
             return true;
         }
     }
-// Common Coupling: truy cập vào dữ liệu static của lớp SessionInformation
+// Common Coupling: truy cáº­p vÃ o dá»¯ liá»‡u static cá»§a lá»›p SessionInformation
     public User getMainUser() throws ExpiredSessionException {
         if (SessionInformation.mainUser == null || SessionInformation.expiredTime == null || SessionInformation.expiredTime.isBefore(LocalDateTime.now())) {
             logout();
@@ -37,7 +43,7 @@ public class AuthenticationController extends BaseController {
     }
 
 
-//    Content coupling do truy cập trực tiếp vào code của lớp SessionInformation
+//    Content coupling do truy cáº­p trá»±c tiáº¿p vÃ o code cá»§a lá»›p SessionInformation
     public void login(String email, String password) throws Exception {
         try {
             User user = new UserDAO().authenticate(email, md5(password));
@@ -48,7 +54,7 @@ public class AuthenticationController extends BaseController {
             throw new FailLoginException();
         }
     }
-// Common Coupling: Thay đổi dữ liêu static của lớp SessionInformation
+// Common Coupling: Thay Ä‘á»•i dá»¯ liÃªu static cá»§a lá»›p SessionInformation
     public void logout() {
         SessionInformation.mainUser = null;
         SessionInformation.expiredTime = null;
