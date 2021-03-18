@@ -39,6 +39,7 @@ public class InterbankSubsystem implements InterbankInterface {
 	 * @see InterbankInterface#refund(CreditCard, int,
 	 *      String)
 	 */
+	//Data Coupling: Dung cac tham so de thuc hien luong thuc thi cua minh
 	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
 		PaymentTransaction transaction = ctrl.refund(card, amount, contents);
 		return transaction;

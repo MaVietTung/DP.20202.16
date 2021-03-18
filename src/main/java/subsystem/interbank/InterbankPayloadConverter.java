@@ -13,6 +13,7 @@ import java.util.Map;
 /**
  * @author
  */
+//Coincidental Cohesion: Cac phuong thuc khong lien quan den nhau
 public class InterbankPayloadConverter {
 
     /**
@@ -22,7 +23,7 @@ public class InterbankPayloadConverter {
      * @param contents
      * @return
      */
-    //Data Coupling
+    //Stamp Coupling: TRuyen vao cau truc du lieu CreditCard thong qua tham so card
     String convertToRequestPayload(CreditCard card, int amount, String contents) {
         Map<String, Object> transaction = new MyMap();
 
@@ -49,6 +50,8 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
+
+    //COntrol Coupling: tham so responseText thay doi thi luong thuc thi thay doi
     // control coupling do su dung errorCode de xac dinh exception
     // coincidental cohesion: read the response from interbank server do not relate to InterbankConverter module
     PaymentTransaction extractPaymentTransaction(String responseText) {
@@ -100,6 +103,7 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
+    //Data COupling: DUng tham so de thuc hien luong thuc thi
     private MyMap convertJSONResponse(String responseText) {
         MyMap response = null;
         try {

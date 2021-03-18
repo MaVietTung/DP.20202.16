@@ -16,11 +16,12 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Logger;
-
+// Communication cohesion: Cac phuong thuc thuc hien viec chia se du lieu cua thuoc tinh Logger va co các mục đích thức hiện có liên quan mật thiết đến nhau
 public class ApplicationProgrammingInterface {
 
 	public static DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	private static Logger LOGGER = Utils.getLogger(Utils.class.getName());
+	//Data Coupling: Dung cac tham so de thuc hien luong thuc thi cua minh
 	//Data Coupling
 	/**
 	 * Procedural cohesion,
@@ -44,6 +45,7 @@ public class ApplicationProgrammingInterface {
 		LOGGER.info("Respone Info: " + respone.substring(0, respone.length() - 1).toString());
 		return respone.substring(0, respone.length() - 1).toString();
 	}
+	//COntrol Coupling: Su thay doi cua tham so url se khien cho luong thuc thi thay doi
 	//Data Coupling
 	/**
 	 * Procedural cohesion,
@@ -73,6 +75,8 @@ public class ApplicationProgrammingInterface {
 		LOGGER.info("Respone Info: " + response.toString());
 		return response.toString();
 	}
+
+	//Data Coupling: Dung cac tham so de thuc hien luong thuc thi cua minh
 	//Data Coupling
 	/**
 	 * Functional cohesion,
@@ -86,7 +90,7 @@ public class ApplicationProgrammingInterface {
 		conn.setRequestProperty("Content-Type", "application/json");
 		return conn;
 	}
-	//Data Coupling
+	//Data Coupling: Dung cac tham so de thuc hien luong thuc thi cua minh
 	private static void allowMethods(String... methods) {
 		try {
 			Field methodsField = HttpURLConnection.class.getDeclaredField("methods");

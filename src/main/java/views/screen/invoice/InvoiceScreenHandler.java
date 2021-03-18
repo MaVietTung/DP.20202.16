@@ -20,7 +20,7 @@ import views.screen.popup.PopupScreen;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Logger;
-
+//SOLID InvoiceScreenHandler: vi pham DIP do phu thuoc vao lop BaseScreenHandler
 public class InvoiceScreenHandler extends BaseScreenHandler {
 
 	private static Logger LOGGER = Utils.getLogger(InvoiceScreenHandler.class.getName());
@@ -103,7 +103,7 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 	}
 
 	@FXMl
-	void confirmInvoice(MouseEvent event) throws IOException {
+	 void confirmInvoice(MouseEvent event) throws IOException {
 		BaseScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, ViewsConfig.PAYMENT_SCREEN_PATH, invoice);
 		paymentScreen.setBController(new PaymentController());
 		paymentScreen.setPreviousScreen(this);

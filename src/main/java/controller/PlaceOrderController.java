@@ -20,8 +20,9 @@ import java.util.regex.Pattern;
 /**
  * This class controls the flow of place order usecase in our AIMS project
  * @author nguyenlm
- */
-
+ **/
+// SOLID: VI PHAM NGUYEN LY SRP: Do có nhieu phuong thuc khong dam bao tinh dong goi do co nhieu nhiem vụ
+// Concidental cohesion: co nhieu phuong thuc ma muc dich duoc su dung khong lien he mat thiet voi nhau
 /**
  * Coincidental cohesion, do các phương thức validate không thực hiện chức năng cho PlaceOrderController
  * chúng nên nằm trong một module khác xử lý về kiểm tra tính hợp lệ của dữ liệu
@@ -65,7 +66,7 @@ public class PlaceOrderController extends BaseController {
      * @throws InterruptedException
      * @throws IOException
      */
-    // Control Coupling
+    // Stamp Coupling: Truyen vao cau truc du lieu cua tham so info
     public DeliveryInfo processDeliveryInfo(HashMap info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         LOGGER.info("Process Delivery Info");
         LOGGER.info(info.toString());
@@ -97,7 +98,7 @@ public class PlaceOrderController extends BaseController {
         || validateAddress(info.get("address"))) return;
         else throw new InvalidDeliveryInfoException();
     }
-    //Data Coupling
+    //COntrol Coupling: tham so phoneNumber thay doi thi luong thuc hien phuong thuc cung thay doi theo
     public boolean validatePhoneNumber(String phoneNumber) {
         if (phoneNumber.length() != 10) return false;
         if (!phoneNumber.startsWith("0")) return false;
@@ -108,7 +109,7 @@ public class PlaceOrderController extends BaseController {
         }
         return true;
     }
-    //Data Coupling
+    //COntrol Coupling: tham so name thay doi thi luong thuc hien phuong thuc cung thay doi theo
     public boolean validateName(String name) {
         if (Objects.isNull(name)) return false;
         String patternString = "^[a-zA-Z\\s]*$";
@@ -116,7 +117,7 @@ public class PlaceOrderController extends BaseController {
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
     }
-    //Data Coupling
+    //COntrol Coupling: tham so name thay doi thi luong thuc hien phuong thuc cung thay doi theo
     public boolean validateAddress(String address) {
         if (Objects.isNull(address)) return false;
         String patternString = "^[a-zA-Z\\s]*$";
