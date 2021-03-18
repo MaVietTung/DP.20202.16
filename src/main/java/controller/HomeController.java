@@ -9,7 +9,6 @@ import dao.media.MediaDAO;
  * This class controls the flow of events in homescreen
  * @author nguyenlm
  */
-//SOLID: Vi pham DIP do phu thuoc module BaseControler
 public class HomeController extends BaseController {
 
 
