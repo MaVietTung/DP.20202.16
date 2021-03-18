@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 
-
+//SOLID:Vi phạm SRP vì class này tồn tại nhiều hơn 1 lý do để thay đổi:
+//thay đổi cách thức authentication và thay đổi phương pháp mã hóa mật khẩu
 /**
  * @author
  */

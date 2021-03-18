@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+//SOLID: Vi phạm SRP tồn tại nhiều hơn 1 lý do để thay đổi: Logic place order và các phương thức validate
 /**
  * This class controls the flow of place order usecase in our AIMS project
  * @author nguyenlm

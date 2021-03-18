@@ -13,7 +13,8 @@ import entity.payment.PaymentTransaction;
 import subsystem.InterbankInterface;
 import subsystem.InterbankSubsystem;
 
-
+//SOLID: Vi phạm OCP vì khi thêm mới phương thức thanh toán Sẽ phải chỉnh sửa code ở đây để
+//có thể chọn thêm phương thức
 /**
  * This {@code PaymentController} class control the flow of the payment process
  * in our AIMS Software.
