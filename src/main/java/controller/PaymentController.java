@@ -21,7 +21,7 @@ import subsystem.InterbankSubsystem;
  * @author hieud
  *
  */
-//SOLID: Vi pham DIP do phu thuoc module BaseControler
+//SOLID: Vi pham DIP do phu thuoc cac thong tin cua SessionInfomation
 public class PaymentController extends BaseController {
 
 	/**

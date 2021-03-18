@@ -20,7 +20,6 @@ import views.screen.popup.PopupScreen;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Logger;
-//SOLID InvoiceScreenHandler: vi pham DIP do phu thuoc vao lop BaseScreenHandler
 public class InvoiceScreenHandler extends BaseScreenHandler {
 
 	private static Logger LOGGER = Utils.getLogger(InvoiceScreenHandler.class.getName());
