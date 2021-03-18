@@ -18,6 +18,7 @@ import java.util.Objects;
  * @author
  */
 //Communication Cohesion: Do ca ba phuong thuc deu lien he mat thiet toi  thuoc tinh static cua lop SessionInformation
+//SOLID: Vi pham DIP do phu thuoc module BaseControler
 public class AuthenticationController extends BaseController {
 
     public boolean isAnonymousSession() {
