@@ -3,6 +3,7 @@ package entity.shipping;
 import entity.order.Order;
 import org.example.DistanceCalculator;
 //SOLID: Vi pham OCP: PHAI THAY doi nhung class khac nhu Oder, DeliveryInfo
+//SOLID VI pham DIP : Phu thuoc vao cac class nhu Oder
 public class DeliveryInfo {
 
     protected String name;
