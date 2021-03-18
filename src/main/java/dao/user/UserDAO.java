@@ -14,6 +14,8 @@ import java.util.Date;
  */
 public class UserDAO {
     //COntrol Coupling: tham so email , encryptedPassword thay doi thi luong thuc hien phuong thuc cung thay doi theo
+    //Data COupling
+	// Coincidental Cohesion: authenticate function must be in its own module
     public User authenticate(String email, String encryptedPassword) throws SQLException {
         String sql = "SELECT * FROM User " +
                 "where email = '" + email + "' and encrypted_password = '" + encryptedPassword + "'";

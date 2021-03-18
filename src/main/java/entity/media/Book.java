@@ -125,4 +125,5 @@ public class Book extends Media {
             ", bookCategory='" + bookCategory + "'" +
             "}";
     }
+    // Coincidental cohesion: các phuong thức get, set
 }

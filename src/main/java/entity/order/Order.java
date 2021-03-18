@@ -24,7 +24,7 @@ public class Order {
         this.tax = 0;
     }
 
-    //Stamp coupling do truyền Card nhưng chỉ dụng phương thức calSubtotal
+    //Stamp coupling - Tham sá»‘ cart chá»‰ sá»­ dá»¥ng calSubtotal
     public Order(Cart cart) {
         List<OrderItem> orderItems = new ArrayList<>();
         for (Object object : SessionInformation.cartInstance.getListMedia()) {
@@ -72,4 +72,6 @@ public class Order {
     public int getTotal() {
         return this.subtotal + this.tax + this.shippingFees;
     }
+    //logical cohesion: các phương thức đều liên quan đến tác vụ order
+   
 }

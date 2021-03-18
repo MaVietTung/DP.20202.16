@@ -18,6 +18,7 @@ public class HomeController extends BaseController {
      * @return List[Media]
      * @throws SQLException
      */
+    // Common coupling - Phương thức có thể truy cập bất cứ đâu
     public static List getAllMedia() throws SQLException{
         return new MediaDAO().getAllMedia();
     }

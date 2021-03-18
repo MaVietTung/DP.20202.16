@@ -50,7 +50,10 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
+
     //COntrol Coupling: tham so responseText thay doi thi luong thuc thi thay doi
+    // control coupling do su dung errorCode de xac dinh exception
+    // coincidental cohesion: read the response from interbank server do not relate to InterbankConverter module
     PaymentTransaction extractPaymentTransaction(String responseText) {
         MyMap response = convertJSONResponse(responseText);
 
@@ -112,12 +115,14 @@ public class InterbankPayloadConverter {
         return response;
     }
 
+    // Coincidental cohesion, phuong thuc getToday khong lien quan den cac phuong thuc khac
     /**
      * Return a {@link String String} that represents the current time in the format of yyyy-MM-dd HH:mm:ss.
      *
      * @author hieudm
      * @return the current time as {@link String String}.
      */
+    // Coincidental Cohesion: getToday do not relate to InterbankConverter module
     private String getToday() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();

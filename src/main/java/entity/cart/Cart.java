@@ -61,6 +61,7 @@ public class Cart {
     }
 
     //Control coupling: do tham số đầu vào là media thay doi thi luong phuong thuc thay doi theo
+    //Stamp coupling - Tham số media chỉ sử dụng getId
     public CartItem checkMediaInCart(Media media){
         for (CartItem cartItem : lstCartItem) {
             if (cartItem.getMedia().getId() == media.getId()) return cartItem;

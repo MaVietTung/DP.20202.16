@@ -7,6 +7,13 @@ public class InterbankSubsystemController {
 
 	private static InterbankPayloadConverter interbankPayloadConverter = new InterbankPayloadConverter();
 	private static InterbankBoundary interbankBoundary = new InterbankBoundary();
+
+	//Data Coupling
+	/**
+	 * Communicational cohesion, cac phuong thuc refund va payOrder
+	 * co cung dau vao va tra ve cung mot dau ra
+	 */
+
 	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
 		return null;
 	}

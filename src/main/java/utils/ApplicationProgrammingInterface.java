@@ -22,6 +22,13 @@ public class ApplicationProgrammingInterface {
 	public static DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	private static Logger LOGGER = Utils.getLogger(Utils.class.getName());
 	//Data Coupling: Dung cac tham so de thuc hien luong thuc thi cua minh
+	//Data Coupling
+	/**
+	 * Procedural cohesion,
+	 * cac doan code co lien quan ve thu tu thuc hien, 
+	 * khong co lien ket ve chuc nang,
+	 * thiet lap request -> doc du lieu tu response
+	 */
 	public static String get(String url, String token) throws Exception {
 		LOGGER.info("Request URL: " + url + "\n");
 		HttpURLConnection conn = setupConnection(url);
@@ -39,6 +46,11 @@ public class ApplicationProgrammingInterface {
 		return respone.substring(0, respone.length() - 1).toString();
 	}
 	//COntrol Coupling: Su thay doi cua tham so url se khien cho luong thuc thi thay doi
+	//Data Coupling
+	/**
+	 * Procedural cohesion,
+	 * tuong tu nhu phuong thuc get
+	 */
 	public static String post(String url, String data) throws IOException {
 		allowMethods("PATCH");
 		HttpURLConnection conn = setupConnection(url);
@@ -63,7 +75,14 @@ public class ApplicationProgrammingInterface {
 		LOGGER.info("Respone Info: " + response.toString());
 		return response.toString();
 	}
+
 	//Data Coupling: Dung cac tham so de thuc hien luong thuc thi cua minh
+	//Data Coupling
+	/**
+	 * Functional cohesion,
+	 * phuong thuc setupConnection duoc tach rieng nham muc dich tao connection
+	 * cho ca phuong thuc get va post
+	 */
 	private static HttpURLConnection setupConnection(String url) throws IOException {
 		HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
 		conn.setDoInput(true);

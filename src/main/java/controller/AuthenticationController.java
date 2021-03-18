@@ -17,8 +17,13 @@ import java.util.Objects;
 /**
  * @author
  */
+
 //Communication Cohesion: Do ca ba phuong thuc deu lien he mat thiet toi  thuoc tinh static cua lop SessionInformation
-//SOLID: Vi pham DIP do phu thuoc module BaseControler
+/**
+ * Coincidental cohesion, do có phương thức md5(String message) dùng để mã hóa chuỗi theo hàm băm md5
+ * không liên quan đến các phương thức khác phục vụ cho mục đích quản lý trong lớp AuthenticationController
+ * không phục vụ cho tính năng của lớp này
+ */
 public class AuthenticationController extends BaseController {
 
     public boolean isAnonymousSession() {
@@ -30,7 +35,7 @@ public class AuthenticationController extends BaseController {
         }
     }
 
-    // Control Coupling: truy cập vào dữ liệu static của lớp SessionInformation
+   // Control Coupling: truy cập vào dữ liệu static của lớp SessionInformation
     public User getMainUser() throws ExpiredSessionException {
         if (SessionInformation.mainUser == null || SessionInformation.expiredTime == null || SessionInformation.expiredTime.isBefore(LocalDateTime.now())) {
             logout();
@@ -50,7 +55,6 @@ public class AuthenticationController extends BaseController {
             throw new FailLoginException();
         }
     }
-
     // Common Coupling: Thay đổi dữ liêu static của lớp SessionInformation
     public void logout() {
         SessionInformation.mainUser = null;

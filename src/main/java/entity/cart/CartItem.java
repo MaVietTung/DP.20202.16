@@ -9,9 +9,10 @@ public class CartItem {
     private int price;
 
     public CartItem(){
-
+        
     }
 
+    //Stamp coupling - Tham số cart không được sử dụng
     public CartItem(Media media, Cart cart, int quantity, int price) {
         this.media = media;
         this.quantity = quantity;
