@@ -22,6 +22,9 @@ import java.util.regex.Pattern;
  * @author nguyenlm
  */
 
+// SOLID: VI PHAM NGUYEN LY SRP: Do có nhieu phuong thuc khong dam bao tinh dong goi do co nhieu nhiem vụ
+
+
 // Concidental cohesion: co nhieu phuong thuc ma muc dich duoc su dung khong lien he mat thiet voi nhau
 
 public class PlaceOrderController extends BaseController {
