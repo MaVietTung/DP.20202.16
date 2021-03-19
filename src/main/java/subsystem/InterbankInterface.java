@@ -26,6 +26,8 @@ public interface InterbankInterface {
 	 * @throws UnrecognizedException if responded with an unknown error code or
 	 *                               something goes wrong
 	 */
+	// SOLID: vi pham OCP, neu thay doi phuong thuc thanh toan phai sua code
+	// SOLID: vi pham DIP, payOrder phu thuoc vao lop cai dat chi tiet CreditCard
 	public abstract PaymentTransaction payOrder(CreditCard card, int amount, String contents)
 			throws PaymentException, UnrecognizedException;
 
@@ -41,6 +43,7 @@ public interface InterbankInterface {
 	 * @throws UnrecognizedException if responded with an unknown error code or
 	 *                               something goes wrong
 	 */
+	// SOLID: vi pham OCP va DIP, tuong tu nhu phuong thuc payOrder
 	public abstract PaymentTransaction refund(CreditCard card, int amount, String contents)
 			throws PaymentException, UnrecognizedException;
 

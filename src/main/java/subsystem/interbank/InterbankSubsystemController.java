@@ -18,6 +18,8 @@ public class InterbankSubsystemController {
 		return null;
 	}
 	//Data Coupling: Dung cac tham so de thuc hien luong thuc thi cua minh
+	// SOLID: vi pham OCP, neu thay doi phuong thuc thanh toan phai sua code
+	// SOLID: vi pham DIP, payOrder phu thuoc vao lop cai dat chi tiet CreditCard
 	public PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
 		String requestPayload = interbankPayloadConverter.convertToRequestPayload(card, amount, contents);
 		String responseText = interbankBoundary.query(InterbankConfigs.PROCESS_TRANSACTION_URL, requestPayload);
