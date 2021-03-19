@@ -30,7 +30,7 @@ public class Media {
     public Media() throws SQLException{
         stm = AIMSDB.getConnection().createStatement();
     }
-
+    //Data COupling: DUng tham so de thuc hien luong thuc thi
     public Media (int id, String title, String category, int price, int quantity, String type) throws SQLException{
         this.id = id;
         this.title = title;
@@ -39,7 +39,7 @@ public class Media {
         this.quantity = quantity;
         this.type = type;
     }
-
+    //Data COupling: DUng tham so de thuc hien luong thuc thi
     public Media(int id, String title, int quantity, String category, String imageUrl, int price, String type) throws SQLException {
         this(id, title, category, price, quantity, type);
         this.imageURL = imageUrl;
@@ -55,7 +55,7 @@ public class Media {
     public int getId() {
         return this.id;
     }
-
+    //Data COupling: DUng tham so de thuc hien luong thuc thi
     private Media setId(int id){
         this.id = id;
         return this;
@@ -64,7 +64,7 @@ public class Media {
     public String getTitle() {
         return this.title;
     }
-
+    //Data COupling: DUng tham so de thuc hien luong thuc thi
     public Media setTitle(String title) {
         this.title = title;
         return this;
@@ -73,7 +73,7 @@ public class Media {
     public String getCategory() {
         return this.category;
     }
-
+    //Data COupling: DUng tham so de thuc hien luong thuc thi
     public Media setCategory(String category) {
         this.category = category;
         return this;
@@ -82,7 +82,7 @@ public class Media {
     public int getPrice() {
         return this.price;
     }
-
+    //Data COupling: DUng tham so de thuc hien luong thuc thi
     public Media setPrice(int price) {
         this.price = price;
         return this;
@@ -91,12 +91,12 @@ public class Media {
     public String getImageURL(){
         return this.imageURL;
     }
-
+    //Data COupling
     public Media setMediaURL(String url){
         this.imageURL = url;
         return this;
     }
-
+    //Data COupling: DUng tham so de thuc hien luong thuc thi
     public Media setQuantity(int quantity) {
         this.quantity = quantity;
         return this;
@@ -105,7 +105,7 @@ public class Media {
     public String getType() {
         return this.type;
     }
-
+    //Data COupling: DUng tham so de thuc hien luong thuc thi
     public Media setType(String type) {
         this.type = type;
         return this;

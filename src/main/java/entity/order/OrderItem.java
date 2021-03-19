@@ -7,7 +7,7 @@ public class OrderItem {
     private Media media;
     private int price;
     private int quantity;
-
+    //Data COupling: DUng tham so de thuc hien luong thuc thi
     public OrderItem(Media media, int quantity, int price) {
         this.media = media;
         this.quantity = quantity;
@@ -26,7 +26,7 @@ public class OrderItem {
     public Media getMedia() {
         return this.media;
     }
-
+//Stamp Coupling: Do truyen vao cau truc du lieu Media qua tham so
     public void setMedia(Media media) {
         this.media = media;
     }

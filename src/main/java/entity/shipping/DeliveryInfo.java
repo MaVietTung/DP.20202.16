@@ -2,7 +2,8 @@ package entity.shipping;
 
 import entity.order.Order;
 import org.example.DistanceCalculator;
-
+//SOLID: Vi pham OCP: PHAI THAY doi nhung class khac nhu Oder, DeliveryInfo
+//SOLID VI pham DIP : Phu thuoc vao cac class nhu Oder
 public class DeliveryInfo {
 
     protected String name;
@@ -11,7 +12,7 @@ public class DeliveryInfo {
     protected String address;
     protected String shippingInstructions;
     protected DistanceCalculator distanceCalculator;
-
+    //Data COupling: DUng tham so de thuc hien luong thuc thi
     public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculator distanceCalculator) {
         this.name = name;
         this.phone = phone;
@@ -21,7 +22,7 @@ public class DeliveryInfo {
         this.distanceCalculator = distanceCalculator;
     }
 
-    //Chưa rõ loại coupling do truyền order nhưng không dùng
+    //Stamp Coupling do truyền order nhưng không dùng
     public int calculateShippingFee(Order order) {
         int distance = distanceCalculator.calculateDistance(address, province);
         return (int) (distance * 1.2);

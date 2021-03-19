@@ -43,8 +43,8 @@ public class PaymentScreenHandler extends BaseScreenHandler {
 
 	@FXML
 	private TextField securityCode;
-
-	public PaymentScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
+//Stamp
+	public PaymentScreenHandler(StaCouplingge stage, String screenPath, Invoice invoice) throws IOException {
 		super(stage, screenPath);
 		try {
 			setupData(invoice);
