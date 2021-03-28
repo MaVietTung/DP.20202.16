@@ -14,7 +14,7 @@ public class Cart {
 
     private List<CartItem> lstCartItem;
 
-    public Cart() {
+    private Cart() {
         lstCartItem = new ArrayList<>();
     }
 
