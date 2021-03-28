@@ -1,0 +1,2 @@
+Subteam: tùng,việt
++ Sử dụng mẫu thiết kế Singleton trong các lớp SessionInformation, BookDao, DVDDAO, CDDAO, CART.
