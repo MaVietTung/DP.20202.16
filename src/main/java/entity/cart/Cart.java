@@ -6,7 +6,7 @@ import java.util.List;
 
 import common.exception.MediaNotAvailableException;
 import entity.media.Media;
-
+// Singleton: Su dung mau thiet ke Singleton boi vi trong he thon chi can mot the hien cua Cart
 //SOLID: vi phạm SRP tồn tại nhiều hơn 1 lý do để thay đổi: ví dụ khi thay đổi cách tính giá
 //Functional Cohesion: Cac phuong thuc deu thuc hien cung mot muc dich co quan he mat thiet voi nhau
 public class Cart {
