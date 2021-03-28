@@ -11,6 +11,8 @@ import subsystem.interbank.InterbankSubsystemController;
  * @author hieud
  *
  */
+// Singleton: Lop InterbankSubsystem co the ap dung singleton do
+// ung dung chi can 1 ket noi toi interbank
 public class InterbankSubsystem implements InterbankInterface {
 
 	/**
