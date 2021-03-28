@@ -9,10 +9,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 
+
+//Singleton: áp dụng singleton vì lớp BookDAO được truy cập thường xuyên mà không cần nhiều instance
 /**
  * @author
  */
 public class BookDAO extends MediaDAO {
+      private static BookDAO instance;
+      private BookDAO(){
+          super();
+      }
+
+    public static BookDAO getInstance(){
+          if (instance == null) instance = new BookDAO();
+          return instance;
+    }
 
     @Override
     //COntrol Coupling: tham so id thay doi thi luong thuc hien phuong thuc cung thay doi theo

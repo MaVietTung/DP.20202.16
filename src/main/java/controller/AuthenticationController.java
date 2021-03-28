@@ -41,7 +41,7 @@ public class AuthenticationController extends BaseController {
 //    Content coupling do truy cập trực tiếp vào code của lớp SessionInformation
     public void login(String email, String password) throws Exception {
         try {
-            User user = new UserDAO().authenticate(email, md5(password));
+           User user = UserDAO.getInstance().authenticate(email, md5(password));
             if (Objects.isNull(user)) throw new FailLoginException();
             SessionInformation.mainUser = user;
             SessionInformation.expiredTime = LocalDateTime.now().plusHours(24);

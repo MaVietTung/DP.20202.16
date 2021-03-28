@@ -8,10 +8,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+//Singleton: áp dụng singleton vì lớp DVDDAO được truy cập thường xuyên mà không cần nhiều instance
+
 /**
  * @author
  */
 public class DVDDAO extends MediaDAO {
+
+    private static DVDDAO instance;
+    private DVDDAO(){
+        super();
+    }
+
+    public static DVDDAO getInstance(){
+        if (instance == null) instance = new DVDDAO();
+        return instance;
+    }
 
     @Override
     ////COntrol Coupling: tham so id thay doi thi luong thuc hien phuong thuc cung thay doi theo
