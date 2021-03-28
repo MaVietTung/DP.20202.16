@@ -7,12 +7,21 @@ import java.util.List;
 import common.exception.MediaNotAvailableException;
 import entity.media.Media;
 
+//Singleton: sử dùng singleton partern vì yêu cầu nghiệp vụ chỉ có duy nhất 1 thể hiện của cart
+//SOLID: vi phạm SRP tồn tại nhiều hơn 1 lý do để thay đổi: ví dụ khi thay đổi cách tính giá
+//Functional Cohesion: Cac phuong thuc deu thuc hien cung mot muc dich co quan he mat thiet voi nhau
 public class Cart {
-    
+    private static Cart instance;
+
     private List<CartItem> lstCartItem;
 
-    public Cart() {
+    private Cart() {
         lstCartItem = new ArrayList<>();
+    }
+
+    public static Cart getInstance(){
+        if(instance == null) instance = new Cart();
+        return instance;
     }
 
     public void addCartMedia(CartItem cm){
@@ -60,6 +69,7 @@ public class Cart {
         if (!allAvailable) throw new MediaNotAvailableException("Some media not available");
     }
 
+    //Control coupling: do tham số đầu vào là media thay doi thi luong phuong thuc thay doi theo
     public CartItem checkMediaInCart(Media media){
         for (CartItem cartItem : lstCartItem) {
             if (cartItem.getMedia().getId() == media.getId()) return cartItem;

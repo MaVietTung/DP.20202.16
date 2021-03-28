@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 
-
+//SOLID:Vi phạm SRP vì class này tồn tại nhiều hơn 1 lý do để thay đổi:
+//thay đổi cách thức authentication và thay đổi phương pháp mã hóa mật khẩu
 /**
  * @author
  */
@@ -36,9 +37,11 @@ public class AuthenticationController extends BaseController {
         } else return SessionInformation.getInstance().mainUser.cloneInformation();
     }
 
+
+//    Content coupling do truy cập trực tiếp vào code của lớp SessionInformation
     public void login(String email, String password) throws Exception {
         try {
-            User user = new UserDAO().authenticate(email, md5(password));
+           User user = UserDAO.getInstance().authenticate(email, md5(password));
             if (Objects.isNull(user)) throw new FailLoginException();
             SessionInformation.getInstance().mainUser = user;
             SessionInformation.getInstance().expiredTime = LocalDateTime.now().plusHours(24);

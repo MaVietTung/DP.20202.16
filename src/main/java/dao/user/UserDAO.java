@@ -1,5 +1,6 @@
 package dao.user;
 
+import dao.media.DVDDAO;
 import entity.db.AIMSDB;
 import entity.media.Book;
 import entity.user.User;
@@ -14,6 +15,17 @@ import java.util.Date;
  */
 public class UserDAO {
 
+    private static UserDAO instance;
+    private UserDAO(){
+        super();
+    }
+
+    public static UserDAO getInstance(){
+        if (instance == null) instance = new UserDAO();
+        return instance;
+    }
+
+    //COntrol Coupling: tham so email , encryptedPassword thay doi thi luong thuc hien phuong thuc cung thay doi theo
     public User authenticate(String email, String encryptedPassword) throws SQLException {
         String sql = "SELECT * FROM User " +
                 "where email = '" + email + "' and encrypted_password = '" + encryptedPassword + "'";
