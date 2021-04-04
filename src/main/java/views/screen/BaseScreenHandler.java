@@ -10,61 +10,83 @@ import controller.BaseController;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.junit.Test;
 import utils.Utils;
 import views.screen.home.HomeScreenHandler;
 import views.screen.popup.PopupScreen;
-//SOLID BaseScreenHandler: vi pham DIP do phu thuoc vao FXMLScreenHandler
+
+
 public abstract class BaseScreenHandler extends FXMLScreenHandler {
 
-	private static final Logger LOGGER = Utils.getLogger(BaseScreenHandler.class.getName());
+    private static final Logger LOGGER = Utils.getLogger(BaseScreenHandler.class.getName());
 
 
-	private Scene scene;
-	private BaseScreenHandler prev;
-	protected final Stage stage;
-	protected HomeScreenHandler homeScreenHandler;
-	protected Hashtable<String, String> messages;
-	private BaseController bController;
-	//STamp Coupling
-	protected BaseScreenHandler(Stage stage, String screenPath) throws IOException {
-		super(screenPath);
-		this.stage = stage;
-	}
-	//STamp Coupling
-	public void setPreviousScreen(BaseScreenHandler prev) {
-		this.prev = prev;
-	}
+    private Scene scene;
+    private BaseScreenHandler prev;
+    protected final Stage stage;
+    protected HomeScreenHandler homeScreenHandler;
+    protected Hashtable<String, String> messages;
+    private BaseController bController;
 
-	public BaseScreenHandler getPreviousScreen() {
-		return this.prev;
-	}
+    //STamp Coupling
+    protected BaseScreenHandler(Stage stage, String screenPath) throws IOException {
+        super(screenPath);
+        this.stage = stage;
+    }
 
-	public void show() {
-		if (this.scene == null) {
-			this.scene = new Scene(this.content);
-		}
-		this.stage.setScene(this.scene);
-		this.stage.show();
-	}
+    //STamp Coupling
+    public void setPreviousScreen(BaseScreenHandler prev) {
+        this.prev = prev;
+    }
 
-	public void setScreenTitle(String string) {
-		this.stage.setTitle(string);
-	}
-	//STamp Coupling
-	public void setBController(BaseController bController){
-		this.bController = bController;
-	}
+    public BaseScreenHandler getPreviousScreen() {
+        return this.prev;
+    }
 
-	public BaseController getBController(){
-		return this.bController;
-	}
-	//STamp Coupling
-	public void forward(Hashtable messages) {
-		this.messages = messages;
-	}
-	//STamp Coupling
-	public void setHomeScreenHandler(HomeScreenHandler HomeScreenHandler) {
-		this.homeScreenHandler = HomeScreenHandler;
-	}
+    public void show() {
+        if (this.scene == null) {
+            this.scene = new Scene(this.content);
+        }
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
 
+    public void setScreenTitle(String string) {
+        this.stage.setTitle(string);
+    }
+
+    //STamp Coupling
+    public void setBController(BaseController bController) {
+        this.bController = bController;
+    }
+
+    public BaseController getBController() {
+        return this.bController;
+    }
+
+    //STamp Coupling
+    public void forward(Hashtable messages) {
+        this.messages = messages;
+    }
+
+    //STamp Coupling
+    public void setHomeScreenHandler(HomeScreenHandler HomeScreenHandler) {
+        this.homeScreenHandler = HomeScreenHandler;
+    }
+
+    // Template method
+    public void setTemplateMethod(BaseScreenHandler prev, String title, BaseController bController, HomeScreenHandler HomeScreenHandler) {
+        if (prev != null) {
+            setPreviousScreen(prev);
+        }
+        if (title != null) {
+            setScreenTitle(title);
+        }
+        if (bController != null) {
+            setBController(bController);
+        }
+        if (HomeScreenHandler != null) {
+            setHomeScreenHandler(HomeScreenHandler);
+        }
+    }
 }
