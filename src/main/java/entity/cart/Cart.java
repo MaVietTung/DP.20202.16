@@ -9,6 +9,7 @@ import entity.media.Media;
 // Singleton: Su dung mau thiet ke Singleton boi vi trong he thon chi can mot the hien cua Cart
 //SOLID: vi phạm SRP tồn tại nhiều hơn 1 lý do để thay đổi: ví dụ khi thay đổi cách tính giá
 //Functional Cohesion: Cac phuong thuc deu thuc hien cung mot muc dich co quan he mat thiet voi nhau
+// Clean code: ten bien cm doi thanh cartIteam
 public class Cart {
     private static Cart instance;
 
@@ -23,12 +24,12 @@ public class Cart {
         return instance;
     }
 
-    public void addCartMedia(CartItem cm){
-        lstCartItem.add(cm);
+    public void addCartMedia(CartItem cartItem){
+        lstCartItem.add(cartItem);
     }
 
-    public void removeCartMedia(CartItem cm){
-        lstCartItem.remove(cm);
+    public void removeCartMedia(CartItem cartItem){
+        lstCartItem.remove(cartItem);
     }
 
     public List getListMedia(){
@@ -42,8 +43,8 @@ public class Cart {
     public int getTotalMedia(){
         int total = 0;
         for (Object obj : lstCartItem) {
-            CartItem cm = (CartItem) obj;
-            total += cm.getQuantity();
+            CartItem cartItem = (CartItem) obj;
+            total += cartItem.getQuantity();
         }
         return total;
     }
@@ -51,8 +52,8 @@ public class Cart {
     public int calSubtotal(){
         int total = 0;
         for (Object obj : lstCartItem) {
-            CartItem cm = (CartItem) obj;
-            total += cm.getPrice()*cm.getQuantity();
+            CartItem cartItem = (CartItem) obj;
+            total += cartItem.getPrice()*cartItem.getQuantity();
         }
         return total;
     }

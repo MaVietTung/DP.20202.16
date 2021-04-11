@@ -62,22 +62,26 @@ public class AuthenticationController extends BaseController {
      * @param message - plain text as {@link String String}.
      * @return cipher text as {@link String String}.
      */
+     // CleanCode: 
+     //ten bien digest bi trung voi thuoc tinh cua doi tuong md 
+     //ten bien md la ten viet tat khong nen dung doi thanh messageDigest
+     //ten bien sb la ten viet tat khong nen dung doi thanh stringBuilder
     private String md5(String message) {
-        String digest = null;
+        String cipherText = null; 
         try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] hash = md.digest(message.getBytes(StandardCharsets.UTF_8));
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            byte[] hash = messageDigest.digest(message.getBytes(StandardCharsets.UTF_8));
             // converting byte array to Hexadecimal String
-            StringBuilder sb = new StringBuilder(2 * hash.length);
+            StringBuilder stringBuilder = new StringBuilder(2 * hash.length);
             for (byte b : hash) {
-                sb.append(String.format("%02x", b & 0xff));
+                stringBuilder.append(String.format("%02x", b & 0xff));
             }
-            digest = sb.toString();
+            cipherText = stringBuilder.toString();
         } catch (NoSuchAlgorithmException ex) {
             Utils.getLogger(Utils.class.getName());
-            digest = "";
+            cipherText = "";
         }
-        return digest;
+        return cipherText;
     }
 
 }
