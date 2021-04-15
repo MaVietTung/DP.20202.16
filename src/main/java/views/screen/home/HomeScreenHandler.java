@@ -106,6 +106,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         }
     }
 
+
+
     protected void setupFunctionality() throws Exception {
 
         aimsImage.setOnMouseClicked(e -> {
@@ -117,9 +119,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             try {
                 LOGGER.info("User clicked to view cart");
                 cartScreen = new CartScreenHandler(this.stage, ViewsConfig.CART_SCREEN_PATH);
-                //cartScreen.setHomeScreenHandler(this);
-                //cartScreen.setBController(new ViewCartController());
-                cartScreen.setTemplateMethod(null,null,new ViewCartController(),this);
+                cartScreen.setHomeScreenHandler(this);
+                cartScreen.setBController(new ViewCartController());
                 cartScreen.requestToViewCart(this);
             } catch (IOException | SQLException e1) {
                 throw new ViewCartException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));

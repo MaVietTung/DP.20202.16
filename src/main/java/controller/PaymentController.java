@@ -47,12 +47,17 @@ public class PaymentController extends BaseController {
 	 *                               the expected format
 	 */
 	// Control Coupling: tham so date duoc su dung de control luong thuc thi cua phuong thuc getExpirationDate
-	private String getExpirationDate(String date) throws InvalidCardException {
+	// cleanCode Method: add them phuong thuc checkErrorDate
+	private String[] checkErrorDate(String date){
 		String[] strs = date.split("/");
 		if (strs.length != 2) {
 			throw new InvalidCardException();
 		}
+		return strs;
+	}
 
+	private String getExpirationDate(String date) throws InvalidCardException {
+		String[] strs = checkErrorDate(date);
 		String expirationDate = null;
 		int month = -1;
 		int year = -1;

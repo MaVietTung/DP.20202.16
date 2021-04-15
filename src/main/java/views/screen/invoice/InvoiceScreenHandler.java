@@ -104,11 +104,10 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 	@FXML
 	 void confirmInvoice(MouseEvent event) throws IOException {
 		BaseScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, ViewsConfig.PAYMENT_SCREEN_PATH, invoice);
-		//paymentScreen.setBController(new PaymentController());
-		//paymentScreen.setPreviousScreen(this);
-		//paymentScreen.setHomeScreenHandler(homeScreenHandler);
-		//paymentScreen.setScreenTitle("Payment Screen");
-		paymentScreen.setTemplateMethod(this,"Payment Screen",new PaymentController(),homeScreenHandler);
+		paymentScreen.setBController(new PaymentController());
+		paymentScreen.setPreviousScreen(this);
+		paymentScreen.setHomeScreenHandler(homeScreenHandler);
+		paymentScreen.setScreenTitle("Payment Screen");
 		paymentScreen.show();
 		LOGGER.info("Confirmed invoice");
 	}

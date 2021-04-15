@@ -74,19 +74,4 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
         this.homeScreenHandler = HomeScreenHandler;
     }
 
-    // Template method
-    public void setTemplateMethod(BaseScreenHandler prev, String title, BaseController bController, HomeScreenHandler HomeScreenHandler) {
-        if (prev != null) {
-            setPreviousScreen(prev);
-        }
-        if (title != null) {
-            setScreenTitle(title);
-        }
-        if (bController != null) {
-            setBController(bController);
-        }
-        if (HomeScreenHandler != null) {
-            setHomeScreenHandler(HomeScreenHandler);
-        }
-    }
 }

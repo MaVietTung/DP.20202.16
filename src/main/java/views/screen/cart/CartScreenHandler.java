@@ -95,15 +95,27 @@ public class CartScreenHandler extends BaseScreenHandler {
 		return (ViewCartController) super.getBController();
 	}
 
+	public void setTemplateMethod(BaseScreenHandler prevScreen){
+		setPreviousScreen(prevScreen);
+	}
+
+
 	public void requestToViewCart(BaseScreenHandler prevScreen) throws SQLException {
 		//setPreviousScreen(prevScreen);
-		setTemplateMethod(prevScreen,null,null,null);
+		setTemplateMethod(prevScreen);
 		setScreenTitle("Cart Screen");
 		getBController().checkAvailabilityOfProduct();
 		displayCartWithMediaAvailability();
 		show();
 	}
-
+	// Clean Code Method: Add new method for get Display Shipping Form
+	private void getDisplaySHippingForm(ShippingScreenHandler shippingScreenHandler,PlaceOrderController placeOrderController){
+		shippingScreenHandler.setPreviousScreen(this);
+		shippingScreenHandler.setHomeScreenHandler(homeScreenHandler);
+		shippingScreenHandler.setScreenTitle("Shipping Screen");
+		shippingScreenHandler.setBController(placeOrderController);
+		shippingScreenHandler.show();
+	}
 	public void requestToPlaceOrder() throws SQLException, IOException {
 		try {
 			// create placeOrderController and process the order
@@ -124,11 +136,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 			// display shipping form
 			ShippingScreenHandler shippingScreenHandler = new ShippingScreenHandler(
 					this.stage, ViewsConfig.SHIPPING_SCREEN_PATH, order);
-			shippingScreenHandler.setPreviousScreen(this);
-			shippingScreenHandler.setHomeScreenHandler(homeScreenHandler);
-			shippingScreenHandler.setScreenTitle("Shipping Screen");
-			shippingScreenHandler.setBController(placeOrderController);
-			shippingScreenHandler.show();
+			getDisplaySHippingForm(shippingScreenHandler,placeOrderController);
 
 		} catch (MediaNotAvailableException e) {
 			// if some media are not available then display cart and break usecase Place Order
