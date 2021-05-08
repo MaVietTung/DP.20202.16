@@ -26,6 +26,7 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
 	protected Hashtable<String, String> messages;
 	private BaseController bController;
 	//STamp Coupling
+	//CLEAN CLASS: các class con dublicate nội dung của hàm khởi tạo
 	protected BaseScreenHandler(Stage stage, String screenPath) throws IOException {
 		super(screenPath);
 		this.stage = stage;

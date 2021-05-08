@@ -12,7 +12,9 @@ import entity.payment.CreditCard;
 import entity.payment.PaymentTransaction;
 import subsystem.InterbankInterface;
 import subsystem.InterbankSubsystem;
+import utils.TimeUtil;
 
+//CLEAN CLASS: Chứa phương thức validate
 //SOLID: Vi phạm OCP vì khi thêm mới phương thức thanh toán Sẽ phải chỉnh sửa code ở đây để
 //có thể chọn thêm phương thức
 /**
@@ -35,42 +37,7 @@ public class PaymentController extends BaseController {
 	 */
 	private InterbankInterface interbank;
 
-	/**
-	 * Validate the input date which should be in the format "mm/yy", and then
-	 * return a {@link String String} representing the date in the
-	 * required format "mmyy" .
-	 * 
-	 * @param date - the {@link String String} represents the input date
-	 * @return {@link String String} - date representation of the required
-	 *         format
-	 * @throws InvalidCardException - if the string does not represent a valid date
-	 *                               the expected format
-	 */
-	// Control Coupling: tham so date duoc su dung de control luong thuc thi cua phuong thuc getExpirationDate
-	private String getExpirationDate(String date) throws InvalidCardException {
-		String[] strs = date.split("/");
-		if (strs.length != 2) {
-			throw new InvalidCardException();
-		}
 
-		String expirationDate = null;
-		int month = -1;
-		int year = -1;
-
-		try {
-			month = Integer.parseInt(strs[0]);
-			year = Integer.parseInt(strs[1]);
-			if (month < 1 || month > 12 || year < Calendar.getInstance().get(Calendar.YEAR) % 100 || year > 100) {
-				throw new InvalidCardException();
-			}
-			expirationDate = strs[0] + strs[1];
-
-		} catch (Exception ex) {
-			throw new InvalidCardException();
-		}
-
-		return expirationDate;
-	}
 
 	/**
 	 * Pay order, and then return the result with a message.
@@ -93,7 +60,7 @@ public class PaymentController extends BaseController {
 			this.card = new CreditCard(
 					cardNumber,
 					cardHolderName,
-					getExpirationDate(expirationDate),
+					TimeUtil.getExpirationDate(expirationDate),
 					Integer.parseInt(securityCode));
 
 			this.interbank = new InterbankSubsystem();
