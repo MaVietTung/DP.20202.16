@@ -16,6 +16,7 @@ import controller.*;
 import entity.cart.Cart;
 import entity.cart.CartItem;
 import entity.media.Media;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -66,7 +67,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     private List homeItems;
     private AuthenticationController authenticationController;
 
-    public HomeScreenHandler(Stage stage, String screenPath) throws IOException{
+    public HomeScreenHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
         try {
             setupData(null);
@@ -80,32 +81,35 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         }
     }
 
-    public Label getNumMediaCartLabel(){
+    public Label getNumMediaCartLabel() {
         return this.numMediaInCart;
     }
 
     public HomeController getBController() {
         return (HomeController) super.getBController();
     }
-//Stamp
+
+    //Stamp
     protected void setupData(Object dto) throws Exception {
         setBController(new HomeController());
+        Cart.getInstance().getListMedia().addListener((ListChangeListener<CartItem>) change -> {
+            numMediaInCart.setText(Cart.getInstance().getTotalMedia() + " media");
+        });
         this.authenticationController = new AuthenticationController();
-        try{
+        try {
             List medium = getBController().getAllMedia();
             this.homeItems = new ArrayList<>();
             for (Object object : medium) {
-                Media media = (Media)object;
+                Media media = (Media) object;
                 MediaHandler m = new MediaHandler(ViewsConfig.HOME_MEDIA_PATH, media);
                 m.attach(this);
                 this.homeItems.add(m);
             }
-        } catch (SQLException | IOException e){
+        } catch (SQLException | IOException e) {
             LOGGER.info("Errors occured: " + e.getMessage());
             e.printStackTrace();
         }
     }
-
 
 
     protected void setupFunctionality() throws Exception {
@@ -139,7 +143,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             btnLogin.setOnMouseClicked(event -> redirectLoginScreen(event));
         } else {
             btnLogin.setText("User");
-            btnLogin.setOnMouseClicked(event -> {});
+            btnLogin.setOnMouseClicked(event -> {
+            });
         }
 
         numMediaInCart.setText(String.valueOf(SessionInformation.getInstance().cartInstance.getListMedia().size()) + " media");
@@ -157,17 +162,17 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         cartImage.setImage(img2);
     }
 
-    public void addMediaHome(List items){
-        ArrayList mediaItems = (ArrayList)((ArrayList) items).clone();
+    public void addMediaHome(List items) {
+        ArrayList mediaItems = (ArrayList) ((ArrayList) items).clone();
         hboxMedia.getChildren().forEach(node -> {
             VBox vBox = (VBox) node;
             vBox.getChildren().clear();
         });
-        while(!mediaItems.isEmpty()){
+        while (!mediaItems.isEmpty()) {
             hboxMedia.getChildren().forEach(node -> {
                 int vid = hboxMedia.getChildren().indexOf(node);
                 VBox vBox = (VBox) node;
-                while(vBox.getChildren().size()<3 && !mediaItems.isEmpty()){
+                while (vBox.getChildren().size() < 3 && !mediaItems.isEmpty()) {
                     MediaHandler media = (MediaHandler) mediaItems.get(0);
                     vBox.getChildren().add(media.getContent());
                     mediaItems.remove(media);
@@ -177,7 +182,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         }
     }
 
-    private void addMenuItem(int position, String text, MenuButton menuButton){
+    private void addMenuItem(int position, String text, MenuButton menuButton) {
         MenuItem menuItem = new MenuItem();
         Label label = new Label();
         label.prefWidthProperty().bind(menuButton.widthProperty().subtract(31));
@@ -195,7 +200,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             List filteredItems = new ArrayList<>();
             homeItems.forEach(me -> {
                 MediaHandler media = (MediaHandler) me;
-                if (media.getMedia().getTitle().toLowerCase().startsWith(text.toLowerCase())){
+                if (media.getMedia().getTitle().toLowerCase().startsWith(text.toLowerCase())) {
                     filteredItems.add(media);
                 }
             });
@@ -230,7 +235,6 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
             // subtract the quantity and redisplay
             media.setQuantity(media.getQuantity() - requestQuantity);
-            numMediaInCart.setText(cart.getTotalMedia() + " media");
             PopupScreen.success("The media " + media.getTitle() + " added to Cart");
         } catch (MediaNotAvailableException exp) {
             try {
