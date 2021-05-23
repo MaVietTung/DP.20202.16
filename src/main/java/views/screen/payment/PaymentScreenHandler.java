@@ -25,7 +25,8 @@ import java.util.logging.Logger;
 public class PaymentScreenHandler extends BaseScreenHandler {
 
 	private static final Logger LOGGER = Utils.getLogger(PaymentScreenHandler.class.getName());
-
+	@FXML
+	private Label errorText;
 	@FXML
 	private Button btnConfirmPayment;
 

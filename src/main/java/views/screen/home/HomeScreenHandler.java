@@ -38,6 +38,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
 
     @FXML
+    private Label errorText;
+    @FXML
     private Label numMediaInCart;
 
     @FXML

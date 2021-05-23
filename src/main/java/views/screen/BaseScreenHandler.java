@@ -1,5 +1,6 @@
 package views.screen;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.List;
@@ -7,10 +8,13 @@ import java.util.logging.Logger;
 
 import controller.AuthenticationController;
 import controller.BaseController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.Test;
+import org.w3c.dom.Text;
 import utils.Utils;
 import views.screen.home.HomeScreenHandler;
 import views.screen.popup.PopupScreen;
@@ -20,7 +24,7 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
 
     private static final Logger LOGGER = Utils.getLogger(BaseScreenHandler.class.getName());
 
-
+    ObservableList<Label> errorTopText= FXCollections.observableArrayList();
     private Scene scene;
     private BaseScreenHandler prev;
     protected final Stage stage;
@@ -42,7 +46,12 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
     public BaseScreenHandler getPreviousScreen() {
         return this.prev;
     }
-
+    void addOservable(Label a){
+        errorTopText.add(a);
+    }
+    void update(){
+        errorTopText.notify();
+    }
     public void show() {
         if (this.scene == null) {
             this.scene = new Scene(this.content);
