@@ -13,7 +13,8 @@ import views.screen.FXMLScreenHandler;
 import views.screen.ViewsConfig;
 
 public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
-
+    @FXML
+    private Label errorText;
     @FXML
     private HBox hboxMedia;
 
