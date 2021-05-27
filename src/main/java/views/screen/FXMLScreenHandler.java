@@ -12,7 +12,7 @@ public class FXMLScreenHandler {
 
 	protected FXMLLoader loader;
 	protected AnchorPane content;
-
+	// Data Coupling
 	public FXMLScreenHandler(String screenPath) throws IOException {
 		this.loader = new FXMLLoader(getClass().getResource(screenPath));
 		// Set this class as the controller

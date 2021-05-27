@@ -13,7 +13,7 @@ public class MediaUpdateException extends AimsException {
 	public MediaUpdateException() {
 
 	}
-
+// Data Coupling
 	public MediaUpdateException(String message) {
 		super(message);
 	}

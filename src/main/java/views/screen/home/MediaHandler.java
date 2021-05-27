@@ -48,7 +48,7 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
     private static Logger LOGGER = Utils.getLogger(MediaHandler.class.getName());
     private Media media;
     private List<Observer> observerList;
-
+// Stamp Coupling
     public MediaHandler(String screenPath, Media media) throws SQLException, IOException{
         super(screenPath);
         this.media = media;

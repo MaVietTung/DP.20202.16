@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+//SOLID: Vi phạm DIP, COP vì phụ thuộc trực tiếp vào DeliveryInfo: khi có phương thức tính khoảng cách mới sẽ phải sửa lại code
+//cần có lớp Abstract ADelivery
+//Communicational Cohesion: Cac phuong thuc co su dung cac thuoc tinh chung de thuc hien luong thuc thi cua minh
 public class Order {
 
     private int shippingFees;
@@ -24,9 +27,10 @@ public class Order {
         this.tax = 0;
     }
 
+    //Stamp coupling do truyền Card nhưng chỉ dụng phương thức calSubtotal
     public Order(Cart cart) {
         List<OrderItem> orderItems = new ArrayList<>();
-        for (Object object : SessionInformation.cartInstance.getListMedia()) {
+        for (Object object : SessionInformation.getInstance().cartInstance.getListMedia()) {
             CartItem cartItem = (CartItem) object;
             OrderItem orderItem = new OrderItem(cartItem.getMedia(),
                     cartItem.getQuantity(),

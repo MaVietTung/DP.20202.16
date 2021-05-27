@@ -8,6 +8,7 @@ import entity.cart.Cart;
  * This class controls the flow of events when users view the Cart
  * @author nguyenlm
  */
+//SOLID: Vi pham DIP do phu thuoc module BaseControler
 public class ViewCartController extends BaseController{
     
     /**
@@ -15,7 +16,7 @@ public class ViewCartController extends BaseController{
      * @throws SQLException
      */
     public void checkAvailabilityOfProduct() throws SQLException{
-        SessionInformation.cartInstance.checkAvailabilityOfProduct();
+        SessionInformation.getInstance().cartInstance.checkAvailabilityOfProduct();
     }
 
     /**
@@ -23,7 +24,7 @@ public class ViewCartController extends BaseController{
      * @return subtotal
      */
     public int getCartSubtotal(){
-        int subtotal = SessionInformation.cartInstance.calSubtotal();
+        int subtotal = SessionInformation.getInstance().cartInstance.calSubtotal();
         return subtotal;
     }
 

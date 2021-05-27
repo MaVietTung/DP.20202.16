@@ -13,7 +13,7 @@ public class InvalidDeliveryInfoException extends AimsException {
 	public InvalidDeliveryInfoException() {
 
 	}
-
+// Data Coupling
 	public InvalidDeliveryInfoException(String message) {
 		super(message);
 	}

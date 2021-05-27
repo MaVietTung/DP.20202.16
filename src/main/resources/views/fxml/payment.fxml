@@ -29,14 +29,14 @@
       </Label>
       <VBox layoutX="114.0" layoutY="163.0" prefHeight="500.0" prefWidth="500.0">
          <children>
-            <RadioButton disable="true" mnemonicParsing="false" selected="true" text="Credit Card">
+            <RadioButton fx:id="methodCreditCard"  mnemonicParsing="false" selected="true" text="Credit Card">
                <font>
                   <Font name="Calibri" size="24.0" />
                </font>
             </RadioButton>
          </children>
       </VBox>
-      <VBox layoutX="772.0" layoutY="158.0" prefHeight="500.0" prefWidth="500.0">
+      <VBox fx:id="inputLayout" layoutX="772.0" layoutY="158.0" prefHeight="500.0" prefWidth="500.0">
          <children>
             <Label prefHeight="50.0" prefWidth="182.0" text="Card number:">
                <font>
@@ -68,16 +68,16 @@
                   <Font name="Calibri" size="24.0" />
                </font>
             </TextField>
-            <Label text="Card security code:">
-               <font>
-                  <Font name="Calibri" size="24.0" />
-               </font>
-            </Label>
-            <TextField fx:id="securityCode" text="185">
-               <font>
-                  <Font name="Calibri" size="24.0" />
-               </font>
-            </TextField>
+<!--            <Label text="Card security code:">-->
+<!--               <font>-->
+<!--                  <Font name="Calibri" size="24.0" />-->
+<!--               </font>-->
+<!--            </Label>-->
+<!--            <TextField fx:id="securityCode" text="185">-->
+<!--               <font>-->
+<!--                  <Font name="Calibri" size="24.0" />-->
+<!--               </font>-->
+<!--            </TextField>-->
          </children>
       </VBox>
       <Button fx:id="btnConfirmPayment" alignment="CENTER" contentDisplay="CENTER" layoutX="518.0" layoutY="671.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="316.0" style="-fx-background-color: #5091e6; -fx-cursor: hand;" text="Confirm payment" textFill="WHITE">

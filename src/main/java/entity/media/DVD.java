@@ -18,7 +18,7 @@ public class DVD extends Media {
     public DVD() throws SQLException{
 
     }
-
+    //Data COupling: DUng tham so de thuc hien luong thuc thi
     public DVD(int id, String title, String category, int price, int quantity, String type, String discType,
             String director, int runtime, String studio, String subtitles, Date releasedDate, String filmType) throws SQLException{
         super(id, title, category, price, quantity, type);
