@@ -8,12 +8,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+//Singleton: áp dụng singleton vì lớp CDDAO được truy cập thường xuyên mà không cần nhiều instance
+
 /**
  * @author
  */
 public class CDDAO extends MediaDAO {
 
+    private static CDDAO instance;
+    private CDDAO(){
+        super();
+    }
+
+    public static CDDAO getInstance(){
+        if (instance == null) instance = new CDDAO();
+        return instance;
+    }
+
     @Override
+    //COntrol Coupling: tham so id thay doi thi luong thuc hien phuong thuc cung thay doi theo
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM "+
                 "aims.CD " +

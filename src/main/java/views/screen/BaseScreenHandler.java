@@ -10,61 +10,68 @@ import controller.BaseController;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.junit.Test;
 import utils.Utils;
 import views.screen.home.HomeScreenHandler;
 import views.screen.popup.PopupScreen;
 
+
 public abstract class BaseScreenHandler extends FXMLScreenHandler {
 
-	private static final Logger LOGGER = Utils.getLogger(BaseScreenHandler.class.getName());
+    private static final Logger LOGGER = Utils.getLogger(BaseScreenHandler.class.getName());
 
 
-	private Scene scene;
-	private BaseScreenHandler prev;
-	protected final Stage stage;
-	protected HomeScreenHandler homeScreenHandler;
-	protected Hashtable<String, String> messages;
-	private BaseController bController;
+    private Scene scene;
+    private BaseScreenHandler prev;
+    protected final Stage stage;
+    protected HomeScreenHandler homeScreenHandler;
+    protected Hashtable<String, String> messages;
+    private BaseController bController;
 
-	protected BaseScreenHandler(Stage stage, String screenPath) throws IOException {
-		super(screenPath);
-		this.stage = stage;
-	}
+    //STamp Coupling
+    protected BaseScreenHandler(Stage stage, String screenPath) throws IOException {
+        super(screenPath);
+        this.stage = stage;
+    }
 
-	public void setPreviousScreen(BaseScreenHandler prev) {
-		this.prev = prev;
-	}
+    //STamp Coupling
+    public void setPreviousScreen(BaseScreenHandler prev) {
+        this.prev = prev;
+    }
 
-	public BaseScreenHandler getPreviousScreen() {
-		return this.prev;
-	}
+    public BaseScreenHandler getPreviousScreen() {
+        return this.prev;
+    }
 
-	public void show() {
-		if (this.scene == null) {
-			this.scene = new Scene(this.content);
-		}
-		this.stage.setScene(this.scene);
-		this.stage.show();
-	}
+    public void show() {
+        if (this.scene == null) {
+            this.scene = new Scene(this.content);
+        }
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
 
-	public void setScreenTitle(String string) {
-		this.stage.setTitle(string);
-	}
+    public void setScreenTitle(String string) {
+        this.stage.setTitle(string);
+    }
 
-	public void setBController(BaseController bController){
-		this.bController = bController;
-	}
+    //STamp Coupling
+    public void setBController(BaseController bController) {
+        this.bController = bController;
+    }
 
-	public BaseController getBController(){
-		return this.bController;
-	}
+    public BaseController getBController() {
+        return this.bController;
+    }
 
-	public void forward(Hashtable messages) {
-		this.messages = messages;
-	}
+    //STamp Coupling
+    public void forward(Hashtable messages) {
+        this.messages = messages;
+    }
 
-	public void setHomeScreenHandler(HomeScreenHandler HomeScreenHandler) {
-		this.homeScreenHandler = HomeScreenHandler;
-	}
+    //STamp Coupling
+    public void setHomeScreenHandler(HomeScreenHandler HomeScreenHandler) {
+        this.homeScreenHandler = HomeScreenHandler;
+    }
 
 }
