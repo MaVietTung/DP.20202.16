@@ -12,6 +12,7 @@ public class DeliveryInfo {
     protected String address;
     protected String shippingInstructions;
     protected DistanceCalculator distanceCalculator;
+
     //Data COupling: DUng tham so de thuc hien luong thuc thi
     public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculator distanceCalculator) {
         this.name = name;
