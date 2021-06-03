@@ -38,7 +38,7 @@ public class AuthenticationController extends BaseController {
     }
 
 
-//    Content coupling do truy cập trực tiếp vào code của lớp SessionInformation
+//    Common coupling do truy cập trực tiếp vào code của lớp SessionInformation
     public void login(String email, String password) throws Exception {
         try {
             User user = new UserDAO().authenticate(email, md5(password));
