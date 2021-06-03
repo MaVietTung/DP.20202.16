@@ -55,7 +55,6 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 	private VBox vboxItems;
 
 	private Invoice invoice;
-// Stamp Coupling
 	public InvoiceScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
 		super(stage, screenPath);
 		try {
