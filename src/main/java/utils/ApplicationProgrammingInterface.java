@@ -38,7 +38,6 @@ public class ApplicationProgrammingInterface {
 		LOGGER.info("Respone Info: " + respone.substring(0, respone.length() - 1).toString());
 		return respone.substring(0, respone.length() - 1).toString();
 	}
-	//COntrol Coupling: Su thay doi cua tham so url se khien cho luong thuc thi thay doi
 	public static String post(String url, String data) throws IOException {
 		allowMethods("PATCH");
 		HttpURLConnection conn = setupConnection(url);
