@@ -51,7 +51,7 @@ public class MediaDAO {
         return null;
     }
 
-    ////COntrol Coupling: tham so value thay doi thi luong thuc hien phuong thuc cung thay doi theo
+    ////Data Coupling: tham so value thay doi thi luong thuc hien phuong thuc cung thay doi theo
     public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();
         if (value instanceof String){
