@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * @author
  */
-// LOgical Cohesion: Có nhiều phương thức cùng thực hiện mục đích gan giong nhau
 public class MediaDAO {
 
     public List getAllMedia() throws SQLException {
