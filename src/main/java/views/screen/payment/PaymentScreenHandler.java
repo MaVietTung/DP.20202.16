@@ -5,8 +5,10 @@ import entity.invoice.Invoice;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
@@ -19,70 +21,78 @@ import java.util.logging.Logger;
 
 public class PaymentScreenHandler extends BaseScreenHandler {
 
-	private static final Logger LOGGER = Utils.getLogger(PaymentScreenHandler.class.getName());
+    private static final Logger LOGGER = Utils.getLogger(PaymentScreenHandler.class.getName());
 
-	@FXML
-	private Button btnConfirmPayment;
+    @FXML
+    private Button btnConfirmPayment;
 
-	@FXML
-	private ImageView loadingImage;
+    @FXML
+    private ImageView loadingImage;
 
-	private Invoice invoice;
+    private Invoice invoice;
 
-	@FXML
-	private Label pageTitle;
+    @FXML
+    private Label pageTitle;
 
-	@FXML
-	private TextField cardNumber;
+    @FXML
+    private TextField cardNumber;
 
-	@FXML
-	private TextField holderName;
+    @FXML
+    private TextField holderName;
 
-	@FXML
-	private TextField expirationDate;
+    @FXML
+    private TextField expirationDate;
 
-	@FXML
-	private TextField securityCode;
-//Stamp
-	public PaymentScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
-		super(stage, screenPath);
-		try {
-			setupData(invoice);
-			setupFunctionality();
-		} catch (IOException ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error("Error when loading resources.");
-		} catch (Exception ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error(ex.getMessage());
-		}
-	}
+    @FXML
+    private AnchorPane paymentPane;
 
-	protected void setupData(Object dto) throws Exception {
-		this.invoice = (Invoice) dto;
-	}
+    private PaymentInputScreenHandler inputScreenHandler;
 
-	protected void setupFunctionality() throws Exception {
-		btnConfirmPayment.setOnMouseClicked(e -> {
-			try {
-				confirmToPayOrder();
-				((PaymentController) getBController()).emptyCart();
-			} catch (Exception exp) {
-				System.out.println(exp.getStackTrace());
-			}
-		});
-	}
+    @FXML
+    RadioButton methodCreditCart;
 
-	void confirmToPayOrder() throws IOException{
-		String contents = "pay order";
-		PaymentController ctrl = (PaymentController) getBController();
-		Map<String, String> response = ctrl.payOrder(invoice.getAmount(), contents, cardNumber.getText(), holderName.getText(),
-				expirationDate.getText(), securityCode.getText());
+    //Stamp
+    public PaymentScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
+        super(stage, screenPath);
+        try {
+            setupData(invoice);
+            setupFunctionality();
+        } catch (IOException ex) {
+            LOGGER.info(ex.getMessage());
+            PopupScreen.error("Error when loading resources.");
+        } catch (Exception ex) {
+            LOGGER.info(ex.getMessage());
+            PopupScreen.error(ex.getMessage());
+        }
+    }
 
-		BaseScreenHandler resultScreen = new ResultScreenHandler(this.stage, ViewsConfig.RESULT_SCREEN_PATH, response);
-		resultScreen.setPreviousScreen(this);
-		resultScreen.setHomeScreenHandler(homeScreenHandler);
-		resultScreen.setScreenTitle("Result Screen");
-		resultScreen.show();
-	}
+    protected void setupData(Object dto) throws Exception {
+        this.invoice = (Invoice) dto;
+        inputScreenHandler = new CreditCardInputScreenHandler(ViewsConfig.INPUT_PAYMENT);
+        paymentPane.getChildren().add(inputScreenHandler.getContent());
+    }
+
+    protected void setupFunctionality() throws Exception {
+        btnConfirmPayment.setOnMouseClicked(e -> {
+            try {
+                confirmToPayOrder();
+                ((PaymentController) getBController()).emptyCart();
+            } catch (Exception exp) {
+                System.out.println(exp.getStackTrace());
+            }
+        });
+        methodCreditCart.setOnMouseClicked(e -> {
+        });
+    }
+
+    void confirmToPayOrder() throws IOException {
+        String contents = "pay order";
+        PaymentController ctrl = (PaymentController) getBController();
+        Map<String, String> response = ctrl.payOrder(invoice.getAmount(), contents, inputScreenHandler.getPaymentCard());
+        BaseScreenHandler resultScreen = new ResultScreenHandler(this.stage, ViewsConfig.RESULT_SCREEN_PATH, response);
+        resultScreen.setPreviousScreen(this);
+        resultScreen.setHomeScreenHandler(homeScreenHandler);
+        resultScreen.setScreenTitle("Result Screen");
+        resultScreen.show();
+    }
 }
