@@ -32,7 +32,7 @@ public class MediaDAO {
         }
         return medium;
     }
-    ////COntrol Coupling: tham so id thay doi thi luong thuc hien phuong thuc cung thay doi theo
+    ////Data Coupling: tham so id thay doi thi luong thuc hien phuong thuc cung thay doi theo
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM Media ;";
         Statement stm = AIMSDB.getConnection().createStatement();
