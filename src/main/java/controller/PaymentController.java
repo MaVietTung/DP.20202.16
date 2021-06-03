@@ -95,7 +95,12 @@ public class PaymentController extends BaseController {
 		Map<String, String> result = new Hashtable<String, String>();
 		result.put("RESULT", "PAYMENT FAILED!");
 		try {
-            this.card = paymentCard;
+//			this.card = new CreditCard(
+//					cardNumber,
+//					cardHolderName,
+//					getExpirationDate(expirationDate),
+//					Integer.parseInt(securityCode));
+            this.card = card;
 			this.interbank = new InterbankSubsystem();
 			PaymentTransaction transaction = interbank.payOrder(paymentCard, amount, contents);
 

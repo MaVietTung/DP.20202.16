@@ -4,11 +4,11 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.text.Font?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
-            prefWidth="500.0" style="-fx-padding: 10 5 5 5;" xmlns="http://javafx.com/javafx/11.0.1"
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="105.0"
+            prefWidth="662.0" style="-fx-padding: 10 5 5 5;" xmlns="http://javafx.com/javafx/11.0.1"
             xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <VBox fx:id="inputBox" prefHeight="500.0" prefWidth="500.0">
+        <VBox fx:id="inputBox" layoutX="772.0" layoutY="158.0" prefHeight="500.0" prefWidth="500.0">
             <children>
                 <Label prefHeight="50.0" prefWidth="182.0" text="Card number:">
                     <font>
