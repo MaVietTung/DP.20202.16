@@ -23,7 +23,7 @@ public class InterbankPayloadConverter {
      * @param contents
      * @return
      */
-    //Stamp Coupling: TRuyen vao cau truc du lieu CreditCard thong qua tham so card
+   
     String convertToRequestPayload(CreditCard card, int amount, String contents) {
         Map<String, Object> transaction = new MyMap();
 
