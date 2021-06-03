@@ -9,6 +9,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
@@ -44,7 +45,7 @@ public class PaymentScreenHandler extends BaseScreenHandler {
     private TextField expirationDate;
 
     @FXML
-    private AnchorPane paymentPane;
+    private VBox vboxItems;
 
     private PaymentInputScreenHandler inputScreenHandler;
 
@@ -68,8 +69,7 @@ public class PaymentScreenHandler extends BaseScreenHandler {
 
     protected void setupData(Object dto) throws Exception {
         this.invoice = (Invoice) dto;
-        inputScreenHandler = new CreditCardInputScreenHandler(ViewsConfig.INPUT_PAYMENT);
-        paymentPane.getChildren().add(inputScreenHandler.getContent());
+        setInputScreenHandler(new CreditCardInputScreenHandler(ViewsConfig.INPUT_PAYMENT));
     }
 
     protected void setupFunctionality() throws Exception {
@@ -83,6 +83,16 @@ public class PaymentScreenHandler extends BaseScreenHandler {
         });
         methodCreditCart.setOnMouseClicked(e -> {
         });
+    }
+
+    private void setInputScreenHandler(PaymentInputScreenHandler inputScreenHandler) {
+        this.inputScreenHandler = inputScreenHandler;
+        updateView();
+    }
+
+    private void updateView() {
+        vboxItems.getChildren().clear();
+        vboxItems.getChildren().add(inputScreenHandler.getContent());
     }
 
     void confirmToPayOrder() throws IOException {

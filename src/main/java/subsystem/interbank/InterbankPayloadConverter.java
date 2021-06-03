@@ -27,7 +27,6 @@ public class InterbankPayloadConverter {
     //Stamp Coupling: TRuyen vao cau truc du lieu CreditCard thong qua tham so card
     String convertToRequestPayload(PaymentCard card, int amount, String contents) {
         Map<String, Object> transaction = new MyMap();
-
         try {
             transaction.putAll(MyMap.toMyMap(card));
         } catch (IllegalArgumentException | IllegalAccessException e) {
@@ -92,7 +91,6 @@ public class InterbankPayloadConverter {
             default:
                 throw new UnrecognizedException();
         }
-
         return trans;
     }
 

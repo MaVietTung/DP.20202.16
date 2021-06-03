@@ -1,13 +1,16 @@
 package views.screen.payment;
 
+import common.exception.InvalidCardException;
 import entity.payment.CreditCard;
 import entity.payment.PaymentCard;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import utils.StringUtils;
 import utils.Utils;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.logging.Logger;
 
 public class CreditCardInputScreenHandler extends PaymentInputScreenHandler {
@@ -22,8 +25,10 @@ public class CreditCardInputScreenHandler extends PaymentInputScreenHandler {
 
     @Override
     public PaymentCard getPaymentCard() {
-        return new CreditCard(getCardNumber().getText(), getHolderName().getText(),
-                getExpirationDate().getText(), Integer.parseInt(cvvCode.getText()));
+        return new CreditCard(getCardNumber().getText(),
+                getHolderName().getText(),
+                StringUtils.getExpirationDate(getExpirationDate().getText()),
+                Integer.parseInt(cvvCode.getText()));
     }
 
     @Override
