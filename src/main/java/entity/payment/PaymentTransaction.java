@@ -1,5 +1,5 @@
 package entity.payment;
-
+//SOLID: OCP khi thay đổi thẻ thanh toán
 public class PaymentTransaction {
 	private String errorCode;
 	private CreditCard card;
