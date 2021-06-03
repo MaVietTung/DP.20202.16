@@ -30,10 +30,6 @@ public abstract class PaymentInputScreenHandler extends FXMLScreenHandler {
     @FXML
     private VBox inputBox;
 
-    public VBox getInputBox() {
-        return inputBox;
-    }
-
     public TextField getCardNumber() {
         return cardNumber;
     }

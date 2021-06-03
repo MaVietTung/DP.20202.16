@@ -36,46 +36,8 @@ public class PaymentController extends BaseController {
 	 */
 	private InterbankInterface interbank;
 
-	/**
-	 * Validate the input date which should be in the format "mm/yy", and then
-	 * return a {@link String String} representing the date in the
-	 * required format "mmyy" .
-	 * 
-	 * @param date - the {@link String String} represents the input date
-	 * @return {@link String String} - date representation of the required
-	 *         format
-	 * @throws InvalidCardException - if the string does not represent a valid date
-	 *                               the expected format
-	 */
-	// Control Coupling: tham so date duoc su dung de control luong thuc thi cua phuong thuc getExpirationDate
-	// cleanCode Method: add them phuong thuc checkErrorDate
-	private String[] checkErrorDate(String date){
-		String[] strs = date.split("/");
-		if (strs.length != 2) {
-			throw new InvalidCardException();
-		}
-		return strs;
-	}
-
-	private String getExpirationDate(String date) throws InvalidCardException {
-		String[] strs = checkErrorDate(date);
-		String expirationDate = null;
-		int month = -1;
-		int year = -1;
-
-		try {
-			month = Integer.parseInt(strs[0]);
-			year = Integer.parseInt(strs[1]);
-			if (month < 1 || month > 12 || year < Calendar.getInstance().get(Calendar.YEAR) % 100 || year > 100) {
-				throw new InvalidCardException();
-			}
-			expirationDate = strs[0] + strs[1];
-
-		} catch (Exception ex) {
-			throw new InvalidCardException();
-		}
-
-		return expirationDate;
+	public PaymentController(InterbankInterface interbankInterface){
+		this.interbank = interbankInterface;
 	}
 
 	/**
@@ -83,10 +45,6 @@ public class PaymentController extends BaseController {
 	 * 
 	 * @param amount         - the amount to pay
 	 * @param contents       - the transaction contents
-//	 * @param cardNumber     - the card number
-//	 * @param cardHolderName - the card holder name
-//	 * @param expirationDate - the expiration date in the format "mm/yy"
-//	 * @param securityCode   - the cvv/cvc code of the credit card
 	 * @return {@link Map Map} represent the payment result with a
 	 *         message.
 	 */
@@ -95,15 +53,8 @@ public class PaymentController extends BaseController {
 		Map<String, String> result = new Hashtable<String, String>();
 		result.put("RESULT", "PAYMENT FAILED!");
 		try {
-//			this.card = new CreditCard(
-//					cardNumber,
-//					cardHolderName,
-//					getExpirationDate(expirationDate),
-//					Integer.parseInt(securityCode));
-            this.card = card;
-			this.interbank = new InterbankSubsystem();
+            this.card = paymentCard;
 			PaymentTransaction transaction = interbank.payOrder(paymentCard, amount, contents);
-
 			result.put("RESULT", "PAYMENT SUCCESSFUL!");
 			result.put("MESSAGE", "You have successfully paid the order!");
 		} catch (PaymentException | UnrecognizedException ex) {
