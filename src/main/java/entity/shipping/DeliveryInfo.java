@@ -2,7 +2,7 @@ package entity.shipping;
 
 import entity.order.Order;
 import org.example.DistanceCalculator;
-//SOLID: Vi pham OCP: PHAI THAY doi nhung class khac nhu Oder, DeliveryInfo
+//SOLID: Vi pham OCP: PHAI THAY doi trong class khi sử dụng hàm tính toán khác DistanceCalculator
 //SOLID VI pham DIP : Phu thuoc vao cac class nhu Oder
 public class DeliveryInfo {
 
