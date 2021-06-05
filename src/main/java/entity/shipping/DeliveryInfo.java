@@ -1,6 +1,10 @@
 package entity.shipping;
 
 import entity.order.Order;
+import shipping_api.IShippingFeeCalculator;
+
+import java.util.List;
+
 import distance_api.IDistanceCalculator;
 
 public class DeliveryInfo {
@@ -11,6 +15,7 @@ public class DeliveryInfo {
     protected String address;
     protected String shippingInstructions;
     protected IDistanceCalculator distanceCalculator;
+    protected IShippingFeeCalculator shippingFeeCalculator;
 
     public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions) {
         this.name = name;
@@ -22,7 +27,8 @@ public class DeliveryInfo {
 
     public int calculateShippingFee(Order order) {
         int distance = distanceCalculator.calculate(address, province);
-        return (int) (distance * 1.2);
+        List orderMediaList = order.getOrderMediaList();
+        return shippingFeeCalculator.calculate(orderMediaList, distance);
     }
 
     public String getName() {
@@ -47,5 +53,9 @@ public class DeliveryInfo {
 
     public void setDistanceCalculator(IDistanceCalculator distanceCalculator) {
         this.distanceCalculator = distanceCalculator;
+    }
+
+    public void setShippingFeeCalculator(IShippingFeeCalculator shippingFeeCalculator) {
+        this.shippingFeeCalculator = shippingFeeCalculator;
     }
 }

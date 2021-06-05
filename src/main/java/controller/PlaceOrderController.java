@@ -18,6 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import distance_api.DistanceCalculatorAdapter;
+import shipping_api.ShippingFeeCalculator;
 
 /**
  * This class controls the flow of place order usecase in our AIMS project
@@ -73,6 +74,7 @@ public class PlaceOrderController extends BaseController {
                 String.valueOf(info.get("address")),
                 String.valueOf(info.get("instructions")));
         deliveryInfo.setDistanceCalculator(new DistanceCalculatorAdapter());
+        deliveryInfo.setShippingFeeCalculator(new ShippingFeeCalculator());
         System.out.println(deliveryInfo.getProvince());
         return deliveryInfo;
     }
