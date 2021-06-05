@@ -1,6 +1,7 @@
 package controller;
 
 import common.exception.InvalidDeliveryInfoException;
+
 import entity.cart.Cart;
 import entity.cart.CartItem;
 import entity.invoice.Invoice;
@@ -8,7 +9,6 @@ import entity.order.Order;
 import entity.order.OrderItem;
 import entity.shipping.DeliveryInfo;
 import entity.shipping.ShippingConfigs;
-import org.example.DistanceCalculator;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -16,6 +16,8 @@ import java.util.*;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import distance_api.DistanceCalculatorAdapter;
 
 /**
  * This class controls the flow of place order usecase in our AIMS project
@@ -69,8 +71,8 @@ public class PlaceOrderController extends BaseController {
                 String.valueOf(info.get("phone")),
                 String.valueOf(info.get("province")),
                 String.valueOf(info.get("address")),
-                String.valueOf(info.get("instructions")),
-                new DistanceCalculator());
+                String.valueOf(info.get("instructions")));
+        deliveryInfo.setDistanceCalculator(new DistanceCalculatorAdapter());
         System.out.println(deliveryInfo.getProvince());
         return deliveryInfo;
     }

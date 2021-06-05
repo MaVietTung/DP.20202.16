@@ -1,7 +1,7 @@
 package entity.shipping;
 
 import entity.order.Order;
-import org.example.DistanceCalculator;
+import distance_api.IDistanceCalculator;
 
 public class DeliveryInfo {
 
@@ -10,19 +10,18 @@ public class DeliveryInfo {
     protected String province;
     protected String address;
     protected String shippingInstructions;
-    protected DistanceCalculator distanceCalculator;
+    protected IDistanceCalculator distanceCalculator;
 
-    public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculator distanceCalculator) {
+    public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions) {
         this.name = name;
         this.phone = phone;
         this.province = province;
         this.address = address;
         this.shippingInstructions = shippingInstructions;
-        this.distanceCalculator = distanceCalculator;
     }
 
     public int calculateShippingFee(Order order) {
-        int distance = distanceCalculator.calculateDistance(address, province);
+        int distance = distanceCalculator.calculate(address, province);
         return (int) (distance * 1.2);
     }
 
@@ -44,5 +43,9 @@ public class DeliveryInfo {
 
     public String getShippingInstructions() {
         return shippingInstructions;
+    }
+
+    public void setDistanceCalculator(IDistanceCalculator distanceCalculator) {
+        this.distanceCalculator = distanceCalculator;
     }
 }
