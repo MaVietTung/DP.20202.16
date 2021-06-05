@@ -11,60 +11,94 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import utils.Utils;
+import views.notification.error.ErrorNotifier;
+import views.notification.error.PopupErrorNotifier;
 import views.screen.home.HomeScreenHandler;
 import views.screen.popup.PopupScreen;
 
 public abstract class BaseScreenHandler extends FXMLScreenHandler {
 
-	private static final Logger LOGGER = Utils.getLogger(BaseScreenHandler.class.getName());
+    private static final Logger LOGGER = Utils.getLogger(BaseScreenHandler.class.getName());
 
 
-	private Scene scene;
-	private BaseScreenHandler prev;
-	protected final Stage stage;
-	protected HomeScreenHandler homeScreenHandler;
-	protected Hashtable<String, String> messages;
-	private BaseController bController;
+    private Scene scene;
+    private BaseScreenHandler prev;
+    protected final Stage stage;
+    protected HomeScreenHandler homeScreenHandler;
+    protected Hashtable<String, String> messages;
+    private BaseController bController;
+    private ErrorNotifier errorNotifier;
 
-	protected BaseScreenHandler(Stage stage, String screenPath) throws IOException {
-		super(screenPath);
-		this.stage = stage;
-	}
+    public BaseScreenHandler(Stage stage, String screenPath) throws IOException {
+        this(stage, screenPath, null);
+    }
+    
+    public BaseScreenHandler(Stage stage, String screenPath, Object data) throws IOException {
+        super(screenPath);
+        this.stage = stage;
+        setErrorNotifier(PopupErrorNotifier.getInstance());
 
-	public void setPreviousScreen(BaseScreenHandler prev) {
-		this.prev = prev;
-	}
+        try {
+            setupData(data);
+            setupFunctionality();
+        } catch (Exception ex) {
+            LOGGER.info(ex.getMessage());
+            notifyError(ex);
+        }
+    }
 
-	public BaseScreenHandler getPreviousScreen() {
-		return this.prev;
-	}
+    protected void setupData(Object data) throws Exception {
+        if (data == null) {
+            setupData();
+        }
+    };
 
-	public void show() {
-		if (this.scene == null) {
-			this.scene = new Scene(this.content);
-		}
-		this.stage.setScene(this.scene);
-		this.stage.show();
-	}
+    protected void setupData() throws Exception {}
 
-	public void setScreenTitle(String string) {
-		this.stage.setTitle(string);
-	}
+    protected void setupFunctionality() throws Exception {};
 
-	public void setBController(BaseController bController){
-		this.bController = bController;
-	}
+    protected void notifyError(Exception ex) throws IOException {
+        PopupScreen.error(ex.getMessage());
+    }
 
-	public BaseController getBController(){
-		return this.bController;
-	}
+    public void setErrorNotifier(ErrorNotifier errorNotifier) {
+        this.errorNotifier = errorNotifier;
+    }
 
-	public void forward(Hashtable messages) {
-		this.messages = messages;
-	}
+    public void setPreviousScreen(BaseScreenHandler prev) {
+        this.prev = prev;
+    }
 
-	public void setHomeScreenHandler(HomeScreenHandler HomeScreenHandler) {
-		this.homeScreenHandler = HomeScreenHandler;
-	}
+    public BaseScreenHandler getPreviousScreen() {
+        return this.prev;
+    }
+
+    public void show() {
+        if (this.scene == null) {
+            this.scene = new Scene(this.content);
+        }
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
+
+    public void setScreenTitle(String string) {
+        this.stage.setTitle(string);
+    }
+
+    public void setBController(BaseController bController){
+        this.bController = bController;
+    }
+
+    public BaseController getBController(){
+        return this.bController;
+    }
+
+    public void forward(Hashtable messages) {
+        this.messages = messages;
+    }
+
+    public void setHomeScreenHandler(HomeScreenHandler HomeScreenHandler) {
+        this.homeScreenHandler = HomeScreenHandler;
+    }
 
 }
