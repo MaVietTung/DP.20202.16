@@ -24,26 +24,18 @@ public class ResultScreenHandler extends BaseScreenHandler {
 	private String message;
 //Stamp Coupling
 	public ResultScreenHandler(Stage stage, String screenPath, Map<String, String> response) throws IOException {
-		super(stage, screenPath);
-		try {
-			setupData(response);
-			setupFunctionality();
-		} catch (IOException ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error("Error when loading resources.");
-		} catch (Exception ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error(ex.getMessage());
-		}
+		super(stage, screenPath, response);
 	}
 
 //Stamp Coupling
+	@Override
 	protected void setupData(Object dto) throws Exception {
 		Map<String, String> response = (Map<String, String>) dto;
 		resultLabel.setText(response.get("RESULT"));
 		messageLabel.setText(response.get("MESSAGE"));
 	}
 
+	@Override
 	protected void setupFunctionality() throws Exception {
 		return;
 	}

@@ -45,26 +45,18 @@ public class LoginScreenHandler extends BaseScreenHandler{
     private PasswordField password;
 //STAMP cOUPLING
     public LoginScreenHandler(Stage stage, String screenPath) throws IOException{
-        super(stage, screenPath);
-        try {
-            setupData(null);
-            setupFunctionality();
-        } catch (IOException ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error("Error when loading resources.");
-        } catch (Exception ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error(ex.getMessage());
-        }
+        super(stage, screenPath, null);
     }
 
     public AuthenticationController getBController() {
         return (AuthenticationController) super.getBController();
     }
 
+    @Override
     protected void setupData(Object dto) throws Exception {
     }
 
+    @Override
     protected void setupFunctionality() throws Exception {
     }
 

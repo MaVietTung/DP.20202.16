@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import subsystem.InterbankSubsystem;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
@@ -57,19 +58,11 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 	private Invoice invoice;
 // Stamp Coupling
 	public InvoiceScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
-		super(stage, screenPath);
-		try {
-			setupData(invoice);
-			setupFunctionality();
-		} catch (IOException ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error("Error when loading resources.");
-		} catch (Exception ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error(ex.getMessage());
-		}
+		super(stage, screenPath, invoice);
 	}
+
 	// Stamp Coupling
+	@Override
 	protected void setupData(Object dto) throws Exception {
 		this.invoice = (Invoice) dto;
 		Order order = invoice.getOrder();
@@ -97,6 +90,7 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 		});
 	}
 
+	@Override
 	protected void setupFunctionality() throws Exception {
 		return;
 	}
@@ -104,7 +98,7 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 	@FXML
 	 void confirmInvoice(MouseEvent event) throws IOException {
 		BaseScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, ViewsConfig.PAYMENT_SCREEN_PATH, invoice);
-		paymentScreen.setBController(new PaymentController());
+		paymentScreen.setBController(new PaymentController(new InterbankSubsystem()));
 		paymentScreen.setPreviousScreen(this);
 		paymentScreen.setHomeScreenHandler(homeScreenHandler);
 		paymentScreen.setScreenTitle("Payment Screen");

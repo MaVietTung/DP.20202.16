@@ -1,14 +1,10 @@
 package entity.payment;
 
 public class DomesticCard extends PaymentCard {
-    private int issueBank;
-    private int cardNUmber;
-    private int validFromDate;
-    private String cardHolderName;
-    public DomesticCard(int issueBank,int cardNUmber,int validFromDate,String cardHolderName){
+    int issueBank;
+
+    public DomesticCard(int issueBank, String cardCode, String dateExpired, String cardHolderName) {
+        super(cardHolderName, cardCode, dateExpired);
         this.issueBank = issueBank;
-        this.cardNUmber = cardNUmber;
-        this.validFromDate = validFromDate;
-        this.cardHolderName = cardHolderName;
     }
 }

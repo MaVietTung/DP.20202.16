@@ -7,12 +7,15 @@ import java.util.logging.Logger;
 
 import controller.AuthenticationController;
 import controller.BaseController;
+import controller.PaymentController;
+import entity.invoice.Invoice;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.Test;
 import utils.Utils;
 import views.screen.home.HomeScreenHandler;
+import views.screen.payment.CreditCardInputScreenHandler;
 import views.screen.popup.PopupScreen;
 
 
@@ -29,10 +32,24 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
     private BaseController bController;
 
     //STamp Coupling
-    protected BaseScreenHandler(Stage stage, String screenPath) throws IOException {
+    protected BaseScreenHandler(Stage stage, String screenPath, Object data) throws IOException {
         super(screenPath);
         this.stage = stage;
+        try {
+            setupData(data);
+            setupFunctionality();
+        } catch (IOException ex) {
+            LOGGER.info(ex.getMessage());
+            PopupScreen.error("Error when loading resources.");
+        } catch (Exception ex) {
+            LOGGER.info(ex.getMessage());
+            PopupScreen.error(ex.getMessage());
+        }
     }
+
+    abstract protected void setupData(Object dto) throws Exception;
+
+    abstract protected void setupFunctionality() throws Exception;
 
     //STamp Coupling
     public void setPreviousScreen(BaseScreenHandler prev) {
