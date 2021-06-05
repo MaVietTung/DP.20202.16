@@ -79,7 +79,6 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         return (HomeController) super.getBController();
     }
 
-    //Stamp
     @Override
     protected void setupData(Object dto) throws Exception {
         setBController(new HomeController());
