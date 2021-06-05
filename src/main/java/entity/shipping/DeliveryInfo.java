@@ -17,6 +17,7 @@ public class DeliveryInfo {
     protected IDistanceCalculator distanceCalculator;
     protected IShippingFeeCalculator shippingFeeCalculator;
 
+    //Data COupling: DUng tham so de thuc hien luong thuc thi
     public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions) {
         this.name = name;
         this.phone = phone;
@@ -25,6 +26,7 @@ public class DeliveryInfo {
         this.shippingInstructions = shippingInstructions;
     }
 
+    //Stamp Coupling do truyền order nhưng không dùng
     public int calculateShippingFee(Order order) {
         int distance = distanceCalculator.calculate(address, province);
         List orderMediaList = order.getOrderMediaList();

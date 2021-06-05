@@ -13,7 +13,7 @@ public class PlaceRushOrderException extends AimsException {
 	public PlaceRushOrderException() {
 
 	}
-
+// Data Coupling
 	public PlaceRushOrderException(String message) {
 		super(message);
 	}

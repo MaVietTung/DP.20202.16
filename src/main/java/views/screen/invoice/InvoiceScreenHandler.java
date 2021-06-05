@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import subsystem.InterbankSubsystem;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
@@ -20,7 +21,6 @@ import views.screen.popup.PopupScreen;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Logger;
-
 public class InvoiceScreenHandler extends BaseScreenHandler {
 
 	private static Logger LOGGER = Utils.getLogger(InvoiceScreenHandler.class.getName());
@@ -88,14 +88,15 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 		});
 	}
 
+	@Override
 	protected void setupFunctionality() throws Exception {
 		return;
 	}
 
 	@FXML
-	void confirmInvoice(MouseEvent event) throws IOException {
+	 void confirmInvoice(MouseEvent event) throws IOException {
 		BaseScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, ViewsConfig.PAYMENT_SCREEN_PATH, invoice);
-		paymentScreen.setBController(new PaymentController());
+		paymentScreen.setBController(new PaymentController(new InterbankSubsystem()));
 		paymentScreen.setPreviousScreen(this);
 		paymentScreen.setHomeScreenHandler(homeScreenHandler);
 		paymentScreen.setScreenTitle("Payment Screen");

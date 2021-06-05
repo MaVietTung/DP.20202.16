@@ -22,7 +22,7 @@ public class ResultScreenHandler extends BaseScreenHandler {
 
 	private String result;
 	private String message;
-
+//Stamp Coupling
 	public ResultScreenHandler(Stage stage, String screenPath, Map<String, String> response) throws IOException {
 		super(stage, screenPath, response);
 	}

@@ -22,9 +22,9 @@ public class PopupScreen extends BaseScreenHandler {
     Label message;
 
     public PopupScreen(Stage stage) throws IOException{
-        super(stage, ViewsConfig.POPUP_PATH);
+        super(stage, ViewsConfig.POPUP_PATH, null);
     }
-
+// Data Coupling
     private static PopupScreen popup(String message, String imagePath, Boolean undecorated) throws IOException{
         PopupScreen popup = new PopupScreen(new Stage());
         if (undecorated) popup.stage.initStyle(StageStyle.UNDECORATED);
@@ -32,17 +32,17 @@ public class PopupScreen extends BaseScreenHandler {
         popup.setImage(imagePath);
         return popup;
     }
-
+    // Data Coupling
     public static void success(String message) throws IOException{
         popup(message, ViewsConfig.IMAGE_PATH + "/" + "tickgreen.png", true)
                 .show(true);
     }
-
+    // Data Coupling
     public static void error(String message) throws IOException{
         popup(message, ViewsConfig.IMAGE_PATH + "/" + "tickerror.png", false)
                 .show(false);
     }
-
+    // Data Coupling
     public static PopupScreen loading(String message) throws IOException{
         return popup(message, ViewsConfig.IMAGE_PATH + "/" + "loading.gif", true);
     }
@@ -50,21 +50,20 @@ public class PopupScreen extends BaseScreenHandler {
     public void setImage(String path) {
         super.setImage(icon, path);
     }
-
+    // Data Coupling
     public void show(Boolean autoClose) {
         super.show();
         if (autoClose) close(0.8);
     }
-
+    // Data Coupling
     public void show(double time) {
         super.show();
         close(time);
     }
-
+    // Data Coupling
     public void close(double time) {
         PauseTransition delay = new PauseTransition(Duration.seconds(time));
         delay.setOnFinished( event -> stage.close() );
         delay.play();
     }
-
 }

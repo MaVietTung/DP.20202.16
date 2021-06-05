@@ -22,7 +22,7 @@ public class IntroScreenHandler extends BaseScreenHandler {
 
     @FXML
     ImageView logo;
-
+// Stamp Coupling
     public IntroScreenHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
     }

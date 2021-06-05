@@ -5,25 +5,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 import common.exception.MediaNotAvailableException;
+import common.interfaces.Observable;
 import entity.media.Media;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
+// Singleton: Su dung mau thiet ke Singleton boi vi trong he thon chi can mot the hien cua Cart
+//SOLID: vi phạm SRP tồn tại nhiều hơn 1 lý do để thay đổi: ví dụ khi thay đổi cách tính giá
+//Functional Cohesion: Cac phuong thuc deu thuc hien cung mot muc dich co quan he mat thiet voi nhau
+// Clean code: ten bien cm doi thanh cartIteam
 public class Cart {
-    
-    private List<CartItem> lstCartItem;
+    private static Cart instance;
 
-    public Cart() {
-        lstCartItem = new ArrayList<>();
+    ObservableList<CartItem> lstCartItem =  FXCollections.observableArrayList();
+
+    private Cart() {
+        lstCartItem.addAll(new ArrayList<>()) ;
     }
 
-    public void addCartMedia(CartItem cm){
-        lstCartItem.add(cm);
+    public static Cart getInstance(){
+        if(instance == null) instance = new Cart();
+        return instance;
     }
 
-    public void removeCartMedia(CartItem cm){
-        lstCartItem.remove(cm);
+    public void addCartMedia(CartItem cartItem){
+        lstCartItem.add(cartItem);
     }
 
-    public List getListMedia(){
+    public void removeCartMedia(CartItem cartItem){
+        lstCartItem.remove(cartItem);
+    }
+
+    public ObservableList<CartItem> getListMedia(){
         return lstCartItem;
     }
 
@@ -34,8 +47,8 @@ public class Cart {
     public int getTotalMedia(){
         int total = 0;
         for (Object obj : lstCartItem) {
-            CartItem cm = (CartItem) obj;
-            total += cm.getQuantity();
+            CartItem cartItem = (CartItem) obj;
+            total += cartItem.getQuantity();
         }
         return total;
     }
@@ -43,8 +56,8 @@ public class Cart {
     public int calSubtotal(){
         int total = 0;
         for (Object obj : lstCartItem) {
-            CartItem cm = (CartItem) obj;
-            total += cm.getPrice()*cm.getQuantity();
+            CartItem cartItem = (CartItem) obj;
+            total += cartItem.getPrice()*cartItem.getQuantity();
         }
         return total;
     }
@@ -60,6 +73,7 @@ public class Cart {
         if (!allAvailable) throw new MediaNotAvailableException("Some media not available");
     }
 
+    //Control coupling: do tham số đầu vào là media thay doi thi luong phuong thuc thay doi theo
     public CartItem checkMediaInCart(Media media){
         for (CartItem cartItem : lstCartItem) {
             if (cartItem.getMedia().getId() == media.getId()) return cartItem;

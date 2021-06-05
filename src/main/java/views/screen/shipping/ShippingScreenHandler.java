@@ -51,7 +51,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 	private ComboBox<String> province;
 
 	private Order order;
-
+//Stamp Coupling
 	public ShippingScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
 		super(stage, screenPath, order);
 	}
@@ -62,6 +62,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 		this.province.getSelectionModel().select(ShippingConfigs.RUSH_SUPPORT_PROVINCES_INDEX[0]);
 	}
 
+	@Override
 	protected void setupFunctionality() throws Exception {
 		final BooleanProperty firstTime = new SimpleBooleanProperty(true); // Variable to store the focus on stage load
 		name.focusedProperty().addListener((observable,  oldValue,  newValue) -> {

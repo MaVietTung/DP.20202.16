@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 
 import controller.AuthenticationController;
 import controller.BaseController;
+import controller.PaymentController;
+import entity.invoice.Invoice;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -14,7 +16,9 @@ import utils.Utils;
 import views.notification.error.ErrorNotifier;
 import views.notification.error.PopupErrorNotifier;
 import views.screen.home.HomeScreenHandler;
+import views.screen.payment.CreditCardInputScreenHandler;
 import views.screen.popup.PopupScreen;
+
 
 public abstract class BaseScreenHandler extends FXMLScreenHandler {
 
