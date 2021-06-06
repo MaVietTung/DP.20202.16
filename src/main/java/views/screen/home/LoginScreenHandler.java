@@ -47,26 +47,10 @@ public class LoginScreenHandler extends BaseScreenHandler{
 //STAMP cOUPLING
     public LoginScreenHandler(Stage stage, String screenPath) throws IOException{
         super(stage, screenPath);
-        try {
-            setupData(null);
-            setupFunctionality();
-        } catch (IOException ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error("Error when loading resources.");
-        } catch (Exception ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error(ex.getMessage());
-        }
     }
 
     public AuthenticationController getBController() {
         return (AuthenticationController) super.getBController();
-    }
-
-    protected void setupData(Object dto) throws Exception {
-    }
-
-    protected void setupFunctionality() throws Exception {
     }
 
     @FXML

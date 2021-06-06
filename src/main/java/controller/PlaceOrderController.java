@@ -1,6 +1,7 @@
 package controller;
 
 import common.exception.InvalidDeliveryInfoException;
+
 import entity.cart.Cart;
 import entity.cart.CartItem;
 import entity.invoice.Invoice;
@@ -9,7 +10,6 @@ import entity.order.Order;
 import entity.order.OrderItem;
 import entity.shipping.DeliveryInfo;
 import entity.shipping.ShippingConfigs;
-import org.example.DistanceCalculator;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -17,6 +17,9 @@ import java.util.*;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import distance_api.DistanceCalculatorAdapter;
+import shipping_api.ShippingFeeCalculator;
 
 //SOLID: Vi phạm SRP tồn tại nhiều hơn 1 lý do để thay đổi: Logic place order và các phương thức validate
 /**
@@ -26,7 +29,6 @@ import java.util.regex.Pattern;
 
 // SOLID: VI PHAM NGUYEN LY SRP: Do có nhieu phuong thuc khong dam bao tinh dong goi do co nhieu nhiem vụ
 
-//SOLID: Vi pham DIP do phu thuoc module BaseControler
 // Concidental cohesion: co nhieu phuong thuc ma muc dich duoc su dung khong lien he mat thiet voi nhau
 
 public class PlaceOrderController extends BaseController {
@@ -78,8 +80,9 @@ public class PlaceOrderController extends BaseController {
                 String.valueOf(info.get("phone")),
                 String.valueOf(info.get("province")),
                 String.valueOf(info.get("address")),
-                String.valueOf(info.get("instructions")),
-                new DistanceCalculator());
+                String.valueOf(info.get("instructions")));
+        deliveryInfo.setDistanceCalculator(new DistanceCalculatorAdapter());
+        deliveryInfo.setShippingFeeCalculator(new ShippingFeeCalculator());
         System.out.println(deliveryInfo.getProvince());
         return deliveryInfo;
     }

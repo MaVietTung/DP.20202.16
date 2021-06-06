@@ -25,6 +25,7 @@ import views.screen.FXMLScreenHandler;
 import views.screen.ViewsConfig;
 import views.screen.popup.PopupScreen;
 
+
 public class MediaHandler extends FXMLScreenHandler implements Observable {
     @FXML
     protected ImageView mediaImage;
@@ -46,14 +47,16 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
 
     private static Logger LOGGER = Utils.getLogger(MediaHandler.class.getName());
     private Media media;
-    private List<Observer> observerList;
-// Stamp Coupling
-    public MediaHandler(String screenPath, Media media) throws SQLException, IOException{
+
+    HandlerClick handlerClick;
+
+    // Stamp Coupling
+    public MediaHandler(HandlerClick handlerClick, String screenPath, Media media) throws SQLException, IOException{
         super(screenPath);
         this.media = media;
-        this.observerList = new ArrayList<>();
+        this.handlerClick = handlerClick;
         addToCartBtn.setOnMouseClicked(event -> {
-            notifyObservers();
+            handlerClick.addToCartClick(media, getRequestQuantity());
         });
         setMediaInfo();
     }
@@ -61,6 +64,7 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
     Media getMedia(){
         return media;
     }
+
     int getRequestQuantity() {
         return spinnerChangeNumber.getValue();
     }
@@ -81,20 +85,5 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
         );
 
         setImage(mediaImage, media.getImageURL());
-    }
-
-    @Override
-    public void attach(Observer observer) {
-        observerList.add(observer);
-    }
-
-    @Override
-    public void remove(Observer observer) {
-        observerList.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        observerList.forEach(observer -> observer.update(this));
     }
 }

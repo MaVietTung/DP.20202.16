@@ -57,5 +57,4 @@ public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
 		image.setFitHeight(90);
 		image.setFitWidth(83);
     }
-
 }

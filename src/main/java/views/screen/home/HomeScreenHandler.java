@@ -16,6 +16,7 @@ import controller.*;
 import entity.cart.Cart;
 import entity.cart.CartItem;
 import entity.media.Media;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -33,7 +34,7 @@ import views.screen.oder.OderScreenHandler;
 import views.screen.popup.PopupScreen;
 
 
-public class HomeScreenHandler extends BaseScreenHandler implements Observer {
+public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick{
 
     public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
     @FXML
@@ -69,48 +70,31 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
     public HomeScreenHandler(Stage stage, String screenPath) throws IOException{
         super(stage, screenPath);
-        try {
-            setupData(null);
-            setupFunctionality();
-        } catch (IOException ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error("Error when loading resources.");
-        } catch (Exception ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error(ex.getMessage());
-        }
     }
 
-    public Label getNumMediaCartLabel(){
-        return this.numMediaInCart;
-    }
-
-    public HomeController getBController() {
-        return (HomeController) super.getBController();
-    }
-//Stamp
-    protected void setupData(Object dto) throws Exception {
+    @Override
+    protected void setupData() throws Exception {
         setBController(new HomeController());
+        Cart.getInstance().getListMedia().addListener((ListChangeListener<CartItem>) change -> {
+            numMediaInCart.setText(Cart.getInstance().getTotalMedia() + " media");
+        });
         this.authenticationController = new AuthenticationController();
-        try{
+        try {
             List medium = getBController().getAllMedia();
             this.homeItems = new ArrayList<>();
             for (Object object : medium) {
-                Media media = (Media)object;
-                MediaHandler m = new MediaHandler(ViewsConfig.HOME_MEDIA_PATH, media);
-                m.attach(this);
-                this.homeItems.add(m);
+                Media media = (Media) object;
+                MediaHandler mediaHandler = new MediaHandler(this, ViewsConfig.HOME_MEDIA_PATH, media);
+                this.homeItems.add(mediaHandler);
             }
-        } catch (SQLException | IOException e){
+        } catch (SQLException | IOException e) {
             LOGGER.info("Errors occured: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-
-
+    @Override
     protected void setupFunctionality() throws Exception {
-
         aimsImage.setOnMouseClicked(e -> {
             addMediaHome(this.homeItems);
         });
@@ -133,6 +117,14 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         addMenuItem(2, "CD", splitMenuBtnSearch);
     }
 
+    public Label getNumMediaCartLabel(){
+        return this.numMediaInCart;
+    }
+
+    public HomeController getBController() {
+        return (HomeController) super.getBController();
+    }
+
     @Override
     public void show() {
         if (authenticationController.isAnonymousSession()) {
@@ -142,7 +134,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             btnOder.setOnMouseClicked(event -> redirectOderListScreen(event));
         } else {
             btnLogin.setText("User");
-            btnLogin.setOnMouseClicked(event -> {});
+            btnLogin.setOnMouseClicked(event -> {
+            });
         }
 
         numMediaInCart.setText(String.valueOf(SessionInformation.getInstance().cartInstance.getListMedia().size()) + " media");
@@ -176,17 +169,17 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         cartImage.setImage(img2);
     }
 
-    public void addMediaHome(List items){
-        ArrayList mediaItems = (ArrayList)((ArrayList) items).clone();
+    public void addMediaHome(List items) {
+        ArrayList mediaItems = (ArrayList) ((ArrayList) items).clone();
         hboxMedia.getChildren().forEach(node -> {
             VBox vBox = (VBox) node;
             vBox.getChildren().clear();
         });
-        while(!mediaItems.isEmpty()){
+        while (!mediaItems.isEmpty()) {
             hboxMedia.getChildren().forEach(node -> {
                 int vid = hboxMedia.getChildren().indexOf(node);
                 VBox vBox = (VBox) node;
-                while(vBox.getChildren().size()<3 && !mediaItems.isEmpty()){
+                while (vBox.getChildren().size() < 3 && !mediaItems.isEmpty()) {
                     MediaHandler media = (MediaHandler) mediaItems.get(0);
                     vBox.getChildren().add(media.getContent());
                     mediaItems.remove(media);
@@ -196,7 +189,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         }
     }
 
-    private void addMenuItem(int position, String text, MenuButton menuButton){
+    private void addMenuItem(int position, String text, MenuButton menuButton) {
         MenuItem menuItem = new MenuItem();
         Label label = new Label();
         label.prefWidthProperty().bind(menuButton.widthProperty().subtract(31));
@@ -214,7 +207,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             List filteredItems = new ArrayList<>();
             homeItems.forEach(me -> {
                 MediaHandler media = (MediaHandler) me;
-                if (media.getMedia().getTitle().toLowerCase().startsWith(text.toLowerCase())){
+                if (media.getMedia().getTitle().toLowerCase().startsWith(text.toLowerCase())) {
                     filteredItems.add(media);
                 }
             });
@@ -225,15 +218,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         menuButton.getItems().add(position, menuItem);
     }
 
+
     @Override
-    public void update(Observable observable) {
-        if (observable instanceof MediaHandler) update((MediaHandler) observable);
-    }
-
-    private void update(MediaHandler mediaHandler) {
-        int requestQuantity = mediaHandler.getRequestQuantity();
-        Media media = mediaHandler.getMedia();
-
+    public void addToCartClick(Media media, int requestQuantity) {
+        System.out.println("click roi "+ requestQuantity);
         try {
             if (requestQuantity > media.getQuantity()) throw new MediaNotAvailableException();
             Cart cart = SessionInformation.getInstance().cartInstance;
@@ -249,7 +237,6 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
             // subtract the quantity and redisplay
             media.setQuantity(media.getQuantity() - requestQuantity);
-            numMediaInCart.setText(cart.getTotalMedia() + " media");
             PopupScreen.success("The media " + media.getTitle() + " added to Cart");
         } catch (MediaNotAvailableException exp) {
             try {
