@@ -33,7 +33,7 @@ import views.screen.cart.CartScreenHandler;
 import views.screen.popup.PopupScreen;
 
 
-public class HomeScreenHandler extends BaseScreenHandler implements Observer {
+public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick{
 
     public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
 
@@ -83,9 +83,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             this.homeItems = new ArrayList<>();
             for (Object object : medium) {
                 Media media = (Media) object;
-                MediaHandler m = new MediaHandler(ViewsConfig.HOME_MEDIA_PATH, media);
-                m.attach(this);
-                this.homeItems.add(m);
+                MediaHandler mediaHandler = new MediaHandler(this, ViewsConfig.HOME_MEDIA_PATH, media);
+                this.homeItems.add(mediaHandler);
             }
         } catch (SQLException | IOException e) {
             LOGGER.info("Errors occured: " + e.getMessage());
@@ -200,15 +199,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         menuButton.getItems().add(position, menuItem);
     }
 
+
     @Override
-    public void update(Observable observable) {
-        if (observable instanceof MediaHandler) update((MediaHandler) observable);
-    }
-
-    private void update(MediaHandler mediaHandler) {
-        int requestQuantity = mediaHandler.getRequestQuantity();
-        Media media = mediaHandler.getMedia();
-
+    public void addToCartClick(Media media, int requestQuantity) {
+        System.out.println("click roi "+ requestQuantity);
         try {
             if (requestQuantity > media.getQuantity()) throw new MediaNotAvailableException();
             Cart cart = SessionInformation.getInstance().cartInstance;
