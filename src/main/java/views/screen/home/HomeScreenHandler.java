@@ -30,13 +30,13 @@ import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
 import views.screen.cart.CartScreenHandler;
+import views.screen.oder.OderScreenHandler;
 import views.screen.popup.PopupScreen;
 
 
 public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick{
 
     public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
-
     @FXML
     private Label numMediaInCart;
 
@@ -63,7 +63,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
 
     @FXML
     private SplitMenuButton splitMenuBtnSearch;
-
+    @FXML
+    private  Button btnOder;
     private List homeItems;
     private AuthenticationController authenticationController;
 
@@ -129,6 +130,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
         if (authenticationController.isAnonymousSession()) {
             btnLogin.setText("Login");
             btnLogin.setOnMouseClicked(event -> redirectLoginScreen(event));
+            btnOder.setText("");
+            btnOder.setOnMouseClicked(event -> redirectOderListScreen(event));
         } else {
             btnLogin.setText("User");
             btnLogin.setOnMouseClicked(event -> {
@@ -137,6 +140,22 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
 
         numMediaInCart.setText(String.valueOf(SessionInformation.getInstance().cartInstance.getListMedia().size()) + " media");
         super.show();
+    }
+
+    private void redirectOderListScreen(MouseEvent event) {
+        try {
+            BaseScreenHandler oderScreen = new OderScreenHandler(this.stage, ViewsConfig.ORDER_SCREEN_PATH);
+            oderScreen.setHomeScreenHandler(this);
+            oderScreen.setBController(this.authenticationController);
+            oderScreen.show();
+        } catch (Exception ex) {
+            try {
+                PopupScreen.error("Cant trigger Login");
+            } catch (Exception ex1) {
+                LOGGER.severe("Cannot login");
+                ex.printStackTrace();
+            }
+        }
     }
 
     public void setImage() {

@@ -5,6 +5,7 @@ import common.exception.InvalidDeliveryInfoException;
 import entity.cart.Cart;
 import entity.cart.CartItem;
 import entity.invoice.Invoice;
+import entity.order.OderInterface;
 import entity.order.Order;
 import entity.order.OrderItem;
 import entity.shipping.DeliveryInfo;
@@ -50,7 +51,7 @@ public class PlaceOrderController extends BaseController {
      * @return Order
      * @throws SQLException
      */
-    public Order createOrder() throws SQLException {
+    public OderInterface createOrder() throws SQLException {
         return new Order(SessionInformation.getInstance().cartInstance);
     }
 
