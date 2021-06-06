@@ -3,6 +3,7 @@ package views.screen.shipping;
 import common.exception.InvalidDeliveryInfoException;
 import controller.PlaceOrderController;
 import entity.invoice.Invoice;
+import entity.order.OderInterface;
 import entity.order.Order;
 import entity.shipping.DeliveryInfo;
 import entity.shipping.ShippingConfigs;
@@ -52,7 +53,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 
 	private Order order;
 //Stamp Coupling
-	public ShippingScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
+	public ShippingScreenHandler(Stage stage, String screenPath, OderInterface order) throws IOException {
 		super(stage, screenPath);
 		try {
 			setupData(order);
