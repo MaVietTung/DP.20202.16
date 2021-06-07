@@ -30,6 +30,7 @@ import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
 import views.screen.cart.CartScreenHandler;
+import views.screen.order.OderScreenHandler;
 import views.screen.popup.PopupScreen;
 
 
@@ -136,6 +137,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
             btnLogin.setText("User");
             btnLogin.setOnMouseClicked(event -> {
             });
+            //btnListOrder.setOnMouseClicked(event -> {(event -> {redirectOderScreen(event)});
         }
 
         numMediaInCart.setText(String.valueOf(SessionInformation.getInstance().cartInstance.getListMedia().size()) + " media");
@@ -243,6 +245,21 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
             loginScreen.setHomeScreenHandler(this);
             loginScreen.setBController(this.authenticationController);
             loginScreen.show();
+        } catch (Exception ex) {
+            try {
+                PopupScreen.error("Cant trigger Login");
+            } catch (Exception ex1) {
+                LOGGER.severe("Cannot login");
+                ex.printStackTrace();
+            }
+        }
+    }
+    private void redirectOderListScreen(MouseEvent event) {
+        try {
+            BaseScreenHandler oderScreen = new OderScreenHandler(this.stage, ViewsConfig.ORDER_SCREEN_PATH);
+            oderScreen.setHomeScreenHandler(this);
+            oderScreen.setBController(this.authenticationController);
+            oderScreen.show();
         } catch (Exception ex) {
             try {
                 PopupScreen.error("Cant trigger Login");
