@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+//CLEAN CLASS: Phụ thuộc vào thư viện bên ngoài
 //SOLID: Vi phạm DIP, COP vì phụ thuộc trực tiếp vào DeliveryInfo: khi có phương thức tính khoảng cách mới sẽ phải sửa lại code
 //cần có lớp Abstract ADelivery
 //Communicational Cohesion: Cac phuong thuc co su dung cac thuoc tinh chung de thuc hien luong thuc thi cua minh

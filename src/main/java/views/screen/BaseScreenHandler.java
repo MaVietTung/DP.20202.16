@@ -8,15 +8,22 @@ import java.util.logging.Logger;
 
 import controller.AuthenticationController;
 import controller.BaseController;
+import controller.PaymentController;
+import entity.invoice.Invoice;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.junit.Test;
 import org.w3c.dom.Text;
 import utils.Utils;
+import views.notification.error.ErrorNotifier;
+import views.notification.error.PopupErrorNotifier;
 import views.screen.home.HomeScreenHandler;
+import views.screen.payment.CreditCardInputScreenHandler;
 import views.screen.popup.PopupScreen;
 
 
@@ -31,14 +38,44 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
     protected HomeScreenHandler homeScreenHandler;
     protected Hashtable<String, String> messages;
     private BaseController bController;
+    private ErrorNotifier errorNotifier;
 
-    //STamp Coupling
-    protected BaseScreenHandler(Stage stage, String screenPath) throws IOException {
+    public BaseScreenHandler(Stage stage, String screenPath) throws IOException {
+        this(stage, screenPath, null);
+    }
+    
+    public BaseScreenHandler(Stage stage, String screenPath, Object data) throws IOException {
         super(screenPath);
         this.stage = stage;
+        setErrorNotifier(PopupErrorNotifier.getInstance());
+
+        try {
+            setupData(data);
+            setupFunctionality();
+        } catch (Exception ex) {
+            LOGGER.info(ex.getMessage());
+            notifyError(ex);
+        }
     }
 
-    //STamp Coupling
+    protected void setupData(Object data) throws Exception {
+        if (data == null) {
+            setupData();
+        }
+    };
+
+    protected void setupData() throws Exception {}
+
+    protected void setupFunctionality() throws Exception {};
+
+    protected void notifyError(Exception ex) throws IOException {
+        errorNotifier.notify(ex.getMessage());
+    }
+
+    public void setErrorNotifier(ErrorNotifier errorNotifier) {
+        this.errorNotifier = errorNotifier;
+    }
+
     public void setPreviousScreen(BaseScreenHandler prev) {
         this.prev = prev;
     }
@@ -64,21 +101,18 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
         this.stage.setTitle(string);
     }
 
-    //STamp Coupling
-    public void setBController(BaseController bController) {
+    public void setBController(BaseController bController){
         this.bController = bController;
     }
 
-    public BaseController getBController() {
+    public BaseController getBController(){
         return this.bController;
     }
 
-    //STamp Coupling
     public void forward(Hashtable messages) {
         this.messages = messages;
     }
 
-    //STamp Coupling
     public void setHomeScreenHandler(HomeScreenHandler HomeScreenHandler) {
         this.homeScreenHandler = HomeScreenHandler;
     }

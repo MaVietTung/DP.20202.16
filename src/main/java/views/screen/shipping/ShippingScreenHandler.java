@@ -53,25 +53,16 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 	private Order order;
 //Stamp Coupling
 	public ShippingScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
-		super(stage, screenPath);
-		try {
-			setupData(order);
-			setupFunctionality();
-		} catch (IOException ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error("Error when loading resources.");
-		} catch (Exception ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error(ex.getMessage());
-		}
+		super(stage, screenPath, order);
 	}
 
-	protected void setupData(Object dto) throws Exception {
-		this.order = (Order) dto;
+	protected void setupData(Object data) throws Exception {
+		this.order = (Order) data;
 		this.province.getItems().addAll(ShippingConfigs.PROVINCES);
 		this.province.getSelectionModel().select(ShippingConfigs.RUSH_SUPPORT_PROVINCES_INDEX[0]);
 	}
 
+	@Override
 	protected void setupFunctionality() throws Exception {
 		final BooleanProperty firstTime = new SimpleBooleanProperty(true); // Variable to store the focus on stage load
 		name.focusedProperty().addListener((observable,  oldValue,  newValue) -> {

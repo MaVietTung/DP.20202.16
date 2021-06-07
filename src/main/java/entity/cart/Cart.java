@@ -13,7 +13,7 @@ import javafx.collections.ObservableList;
 // Singleton: Su dung mau thiet ke Singleton boi vi trong he thon chi can mot the hien cua Cart
 //SOLID: vi phạm SRP tồn tại nhiều hơn 1 lý do để thay đổi: ví dụ khi thay đổi cách tính giá
 //Functional Cohesion: Cac phuong thuc deu thuc hien cung mot muc dich co quan he mat thiet voi nhau
-// Clean code: ten bien cm doi thanh cartIteam
+// Clean code: ten bien cm doi thanh cartIteam, lstItem -> lstCartItem do list
 public class Cart {
     private static Cart instance;
 

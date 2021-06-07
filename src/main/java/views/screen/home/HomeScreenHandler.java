@@ -33,7 +33,7 @@ import views.screen.cart.CartScreenHandler;
 import views.screen.popup.PopupScreen;
 
 
-public class HomeScreenHandler extends BaseScreenHandler implements Observer {
+public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick{
 
     public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
 
@@ -70,17 +70,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     private AuthenticationController authenticationController;
 
     public HomeScreenHandler(Stage stage, String screenPath) throws IOException {
-        super(stage, screenPath);
-        try {
-            setupData(null);
-            setupFunctionality();
-        } catch (IOException ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error("Error when loading resources.");
-        } catch (Exception ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error(ex.getMessage());
-        }
+        super(stage, screenPath, null);
     }
 
     public Label getNumMediaCartLabel() {
@@ -91,8 +81,9 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         return (HomeController) super.getBController();
     }
 
-    //Stamp
-    protected void setupData(Object dto) throws Exception {
+
+    @Override
+    protected void setupData() throws Exception {
         setBController(new HomeController());
         Cart.getInstance().getListMedia().addListener((ListChangeListener<CartItem>) change -> {
             numMediaInCart.setText(Cart.getInstance().getTotalMedia() + " media");
@@ -103,9 +94,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             this.homeItems = new ArrayList<>();
             for (Object object : medium) {
                 Media media = (Media) object;
-                MediaHandler m = new MediaHandler(ViewsConfig.HOME_MEDIA_PATH, media);
-                m.attach(this);
-                this.homeItems.add(m);
+                MediaHandler mediaHandler = new MediaHandler(this, ViewsConfig.HOME_MEDIA_PATH, media);
+                this.homeItems.add(mediaHandler);
             }
         } catch (SQLException | IOException e) {
             LOGGER.info("Errors occured: " + e.getMessage());
@@ -114,8 +104,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     }
 
 
+    @Override
     protected void setupFunctionality() throws Exception {
-
         aimsImage.setOnMouseClicked(e -> {
             addMediaHome(this.homeItems);
         });
@@ -136,6 +126,14 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         addMenuItem(0, "Book", splitMenuBtnSearch);
         addMenuItem(1, "DVD", splitMenuBtnSearch);
         addMenuItem(2, "CD", splitMenuBtnSearch);
+    }
+
+    public Label getNumMediaCartLabel(){
+        return this.numMediaInCart;
+    }
+
+    public HomeController getBController() {
+        return (HomeController) super.getBController();
     }
 
     @Override
@@ -213,15 +211,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         menuButton.getItems().add(position, menuItem);
     }
 
+
     @Override
-    public void update(Observable observable) {
-        if (observable instanceof MediaHandler) update((MediaHandler) observable);
-    }
-
-    private void update(MediaHandler mediaHandler) {
-        int requestQuantity = mediaHandler.getRequestQuantity();
-        Media media = mediaHandler.getMedia();
-
+    public void addToCartClick(Media media, int requestQuantity) {
+        System.out.println("click roi "+ requestQuantity);
         try {
             if (requestQuantity > media.getQuantity()) throw new MediaNotAvailableException();
             Cart cart = SessionInformation.getInstance().cartInstance;
