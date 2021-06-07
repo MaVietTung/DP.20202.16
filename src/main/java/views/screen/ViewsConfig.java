@@ -27,8 +27,8 @@ public class ViewsConfig {
     public static final String HOME_MEDIA_PATH = "/views/fxml/media_home.fxml";
     public static final String POPUP_PATH = "/views/fxml/popup.fxml";
     public static final String INPUT_PAYMENT = "/views/fxml/payment_input.fxml";
-
-
+    public static  final String ORDER_SCREEN_PATH = "...";
+    public static  final String ORDER_HOME_PATH = "...";
     public static float PERCENT_VAT = 10;
 
     public static Font REGULAR_FONT = Font.font("Segoe UI", FontWeight.NORMAL, FontPosture.REGULAR, 24);

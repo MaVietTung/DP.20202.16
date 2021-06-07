@@ -24,7 +24,8 @@ import java.util.logging.Logger;
 public class InvoiceScreenHandler extends BaseScreenHandler {
 
 	private static Logger LOGGER = Utils.getLogger(InvoiceScreenHandler.class.getName());
-
+	@FXML
+	private Label errorText;
 	@FXML
 	private Label pageTitle;
 

@@ -13,7 +13,9 @@ import entity.payment.PaymentCard;
 import entity.payment.PaymentTransaction;
 import subsystem.InterbankInterface;
 import subsystem.InterbankSubsystem;
+import utils.TimeUtil;
 
+//CLEAN CLASS: Chứa phương thức validate
 //SOLID: Vi phạm OCP vì khi thêm mới phương thức thanh toán Sẽ phải chỉnh sửa code ở đây để
 //có thể chọn thêm phương thức
 /**
@@ -23,7 +25,6 @@ import subsystem.InterbankSubsystem;
  * @author hieud
  *
  */
-//SOLID: Vi pham DIP do phu thuoc cac thong tin cua SessionInfomation
 public class PaymentController extends BaseController {
 
 	/**
@@ -35,7 +36,7 @@ public class PaymentController extends BaseController {
 	 * Represent the Interbank subsystem
 	 */
 	private InterbankInterface interbank;
-
+  
 	public PaymentController(InterbankInterface interbankInterface){
 		this.interbank = interbankInterface;
 	}

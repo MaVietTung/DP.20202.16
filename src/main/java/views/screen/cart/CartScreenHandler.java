@@ -26,6 +26,7 @@ import views.screen.ViewsConfig;
 import views.screen.popup.PopupScreen;
 import views.screen.shipping.ShippingScreenHandler;
 
+//CLEAN CLASS: phụ thuộc vào loại media
 public class CartScreenHandler extends BaseScreenHandler {
 	private static Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
 
@@ -166,7 +167,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 				// display the attribute of vboxCart media
 				CartItem cartItem = (CartItem) cm;
-				MediaHandler mediaCartScreen = new MediaHandler(ViewsConfig.CART_MEDIA_PATH, this);
+				CartMediaHandler mediaCartScreen = new CartMediaHandler(ViewsConfig.CART_MEDIA_PATH, this);
 				mediaCartScreen.setCartItem(cartItem);
 
 				// add spinner

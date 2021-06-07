@@ -20,6 +20,7 @@ public class ResultScreenHandler extends BaseScreenHandler {
 
 	private static final Logger LOGGER = Utils.getLogger(PaymentScreenHandler.class.getName());
 
+
 	private String result;
 	private String message;
 //Stamp Coupling
@@ -38,7 +39,8 @@ public class ResultScreenHandler extends BaseScreenHandler {
 	protected void setupFunctionality() throws Exception {
 		return;
 	}
-
+	@FXML
+	private Label errorText;
 	@FXML
 	private Label pageTitle;
 
