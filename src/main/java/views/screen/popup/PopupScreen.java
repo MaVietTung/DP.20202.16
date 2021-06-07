@@ -22,7 +22,7 @@ public class PopupScreen extends BaseScreenHandler {
     Label message;
 
     public PopupScreen(Stage stage) throws IOException{
-        super(stage, ViewsConfig.POPUP_PATH);
+        super(stage, ViewsConfig.POPUP_PATH, null);
     }
 // Data Coupling
     private static PopupScreen popup(String message, String imagePath, Boolean undecorated) throws IOException{
@@ -65,11 +65,5 @@ public class PopupScreen extends BaseScreenHandler {
         PauseTransition delay = new PauseTransition(Duration.seconds(time));
         delay.setOnFinished( event -> stage.close() );
         delay.play();
-    }
-//Stamp Coupling
-    protected void setupData(Object dto) throws Exception {
-    }
-
-    protected void setupFunctionality() throws Exception {
     }
 }

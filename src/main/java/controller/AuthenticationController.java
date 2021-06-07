@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import static utils.EncodeUtils.md5;
+
 
 //SOLID:Vi phạm SRP vì class này tồn tại nhiều hơn 1 lý do để thay đổi:
 //thay đổi cách thức authentication và thay đổi phương pháp mã hóa mật khẩu
@@ -54,34 +56,4 @@ public class AuthenticationController extends BaseController {
         SessionInformation.getInstance().mainUser = null;
         SessionInformation.getInstance().expiredTime = null;
     }
-
-    /**
-     * Return a {@link String String} that represents the cipher text
-     * encrypted by md5 algorithm.
-     *
-     * @param message - plain text as {@link String String}.
-     * @return cipher text as {@link String String}.
-     */
-     // CleanCode: 
-     //ten bien digest bi trung voi thuoc tinh cua doi tuong md 
-     //ten bien md la ten viet tat khong nen dung doi thanh messageDigest
-     //ten bien sb la ten viet tat khong nen dung doi thanh stringBuilder
-    private String md5(String message) {
-        String cipherText = null; 
-        try {
-            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-            byte[] hash = messageDigest.digest(message.getBytes(StandardCharsets.UTF_8));
-            // converting byte array to Hexadecimal String
-            StringBuilder stringBuilder = new StringBuilder(2 * hash.length);
-            for (byte b : hash) {
-                stringBuilder.append(String.format("%02x", b & 0xff));
-            }
-            cipherText = stringBuilder.toString();
-        } catch (NoSuchAlgorithmException ex) {
-            Utils.getLogger(Utils.class.getName());
-            cipherText = "";
-        }
-        return cipherText;
-    }
-
 }

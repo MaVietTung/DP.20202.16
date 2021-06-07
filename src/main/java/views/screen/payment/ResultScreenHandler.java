@@ -20,34 +20,25 @@ public class ResultScreenHandler extends BaseScreenHandler {
 
 	private static final Logger LOGGER = Utils.getLogger(PaymentScreenHandler.class.getName());
 
+
 	private String result;
 	private String message;
 //Stamp Coupling
 	public ResultScreenHandler(Stage stage, String screenPath, Map<String, String> response) throws IOException {
-		super(stage, screenPath);
-		try {
-			setupData(response);
-			setupFunctionality();
-		} catch (IOException ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error("Error when loading resources.");
-		} catch (Exception ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error(ex.getMessage());
-		}
+		super(stage, screenPath, response);
 	}
 
-//Stamp Coupling
-	protected void setupData(Object dto) throws Exception {
-		Map<String, String> response = (Map<String, String>) dto;
+    @Override
+	protected void setupData(Object data) throws Exception {
+		Map<String, String> response = (Map<String, String>) data;
 		resultLabel.setText(response.get("RESULT"));
 		messageLabel.setText(response.get("MESSAGE"));
 	}
 
+    @Override
 	protected void setupFunctionality() throws Exception {
 		return;
 	}
-
 	@FXML
 	private Label pageTitle;
 

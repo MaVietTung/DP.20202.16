@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import subsystem.InterbankSubsystem;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
@@ -23,7 +24,6 @@ import java.util.logging.Logger;
 public class InvoiceScreenHandler extends BaseScreenHandler {
 
 	private static Logger LOGGER = Utils.getLogger(InvoiceScreenHandler.class.getName());
-
 	@FXML
 	private Label pageTitle;
 
@@ -55,23 +55,13 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 	private VBox vboxItems;
 
 	private Invoice invoice;
-// Stamp Coupling
+
 	public InvoiceScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
-		super(stage, screenPath);
-		try {
-			setupData(invoice);
-			setupFunctionality();
-		} catch (IOException ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error("Error when loading resources.");
-		} catch (Exception ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error(ex.getMessage());
-		}
+		super(stage, screenPath, invoice);
 	}
-	// Stamp Coupling
-	protected void setupData(Object dto) throws Exception {
-		this.invoice = (Invoice) dto;
+
+	protected void setupData(Object data) throws Exception {
+		this.invoice = (Invoice) data;
 		Order order = invoice.getOrder();
 		DeliveryInfo deliveryInfo = order.getDeliveryInfo();
 
@@ -97,6 +87,7 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 		});
 	}
 
+	@Override
 	protected void setupFunctionality() throws Exception {
 		return;
 	}
@@ -104,11 +95,10 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 	@FXML
 	 void confirmInvoice(MouseEvent event) throws IOException {
 		BaseScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, ViewsConfig.PAYMENT_SCREEN_PATH, invoice);
-		//paymentScreen.setBController(new PaymentController());
-		//paymentScreen.setPreviousScreen(this);
-		//paymentScreen.setHomeScreenHandler(homeScreenHandler);
-		//paymentScreen.setScreenTitle("Payment Screen");
-		paymentScreen.setTemplateMethod(this,"Payment Screen",new PaymentController(),homeScreenHandler);
+		paymentScreen.setBController(new PaymentController(new InterbankSubsystem()));
+		paymentScreen.setPreviousScreen(this);
+		paymentScreen.setHomeScreenHandler(homeScreenHandler);
+		paymentScreen.setScreenTitle("Payment Screen");
 		paymentScreen.show();
 		LOGGER.info("Confirmed invoice");
 	}

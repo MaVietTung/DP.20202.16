@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
+            prefWidth="500.0" style="-fx-padding: 10 5 5 5;" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox fx:id="inputBox" prefHeight="500.0" prefWidth="500.0">
+            <children>
+                <Label prefHeight="50.0" prefWidth="182.0" text="Card number:">
+                    <font>
+                        <Font name="Calibri" size="24.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="cardNumber" text="118609_group1_2020">
+                    <font>
+                        <Font name="Calibri" size="24.0"/>
+                    </font>
+                </TextField>
+                <Label prefHeight="50.0" prefWidth="231.0" text="Card holder name:">
+                    <font>
+                        <Font name="Calibri" size="24.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="holderName" text="Group 1">
+                    <font>
+                        <Font name="Calibri" size="24.0"/>
+                    </font>
+                </TextField>
+                <Label prefHeight="50.0" prefWidth="243.0" text="Expiration date:">
+                    <font>
+                        <Font name="Calibri" size="24.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="expirationDate" text="11/25">
+                    <font>
+                        <Font name="Calibri" size="24.0"/>
+                    </font>
+                </TextField>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

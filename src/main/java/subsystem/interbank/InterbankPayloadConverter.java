@@ -2,6 +2,7 @@ package subsystem.interbank;
 
 import common.exception.*;
 import entity.payment.CreditCard;
+import entity.payment.PaymentCard;
 import entity.payment.PaymentTransaction;
 import utils.MyMap;
 
@@ -24,9 +25,8 @@ public class InterbankPayloadConverter {
      * @return
      */
     //Stamp Coupling: TRuyen vao cau truc du lieu CreditCard thong qua tham so card
-    String convertToRequestPayload(CreditCard card, int amount, String contents) {
+    String convertToRequestPayload(PaymentCard card, int amount, String contents) {
         Map<String, Object> transaction = new MyMap();
-
         try {
             transaction.putAll(MyMap.toMyMap(card));
         } catch (IllegalArgumentException | IllegalAccessException e) {
@@ -57,7 +57,7 @@ public class InterbankPayloadConverter {
         if (response == null)
             return null;
         MyMap transaction = (MyMap) response.get("transaction");
-        CreditCard card = new CreditCard(
+        PaymentCard card = new CreditCard(
                 (String) transaction.get("cardCode"),
                 (String) transaction.get("owner"),
                 (String) transaction.get("dateExpired"),
@@ -91,7 +91,6 @@ public class InterbankPayloadConverter {
             default:
                 throw new UnrecognizedException();
         }
-
         return trans;
     }
 

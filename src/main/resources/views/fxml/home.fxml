@@ -80,6 +80,11 @@
                               <Font size="24.0" />
                            </font>
                         </Button>
+                        <Button fx:id="btnOder" layoutY="0.0" mnemonicParsing="false" onMouseClicked="#redirectLoginScreen" prefHeight="45.0" prefWidth="103.0" text="Login" disable="true">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
                </children>

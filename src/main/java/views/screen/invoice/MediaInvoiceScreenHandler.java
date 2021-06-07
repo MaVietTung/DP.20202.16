@@ -13,7 +13,6 @@ import views.screen.FXMLScreenHandler;
 import views.screen.ViewsConfig;
 
 public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
-
     @FXML
     private HBox hboxMedia;
 
@@ -58,5 +57,4 @@ public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
 		image.setFitHeight(90);
 		image.setFitWidth(83);
     }
-
 }
