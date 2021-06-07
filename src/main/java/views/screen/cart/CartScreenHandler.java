@@ -12,7 +12,6 @@ import common.exception.PlaceOrderException;
 import controller.PlaceOrderController;
 import controller.ViewCartController;
 import entity.cart.CartItem;
-import entity.order.OderInterface;
 import entity.order.Order;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -125,7 +124,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 			displayCartWithMediaAvailability();
 
 			// create order
-			OderInterface order = placeOrderController.createOrder();
+			Order order = placeOrderController.createOrder();
 
 			// display shipping form
 			ShippingScreenHandler shippingScreenHandler = new ShippingScreenHandler(

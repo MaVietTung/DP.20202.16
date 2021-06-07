@@ -3,7 +3,6 @@ package controller;
 import common.exception.InvalidDeliveryInfoException;
 
 import entity.invoice.Invoice;
-import entity.order.OderInterface;
 import entity.order.Order;
 import entity.shipping.DeliveryInfo;
 
@@ -15,7 +14,7 @@ import java.util.logging.Logger;
 import distance_api.DistanceCalculatorAdapter;
 import shipping_api.ShippingFeeCalculator;
 
-import static utils.ValidateUtils.validateDeliveryInfo;
+import utils.ValidateUtil;
 
 //SOLID: Vi phạm SRP tồn tại nhiều hơn 1 lý do để thay đổi: Logic place order và các phương thức validate
 /**
@@ -47,7 +46,7 @@ public class PlaceOrderController extends BaseController {
      * @return Order
      * @throws SQLException
      */
-    public OderInterface createOrder() throws SQLException {
+    public Order createOrder() throws SQLException {
         return new Order(SessionInformation.getInstance().cartInstance);
     }
 

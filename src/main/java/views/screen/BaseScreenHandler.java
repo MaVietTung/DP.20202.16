@@ -18,7 +18,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.junit.Test;
 import org.w3c.dom.Text;
 import utils.Utils;
 import views.notification.error.ErrorNotifier;
@@ -32,6 +31,7 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
 
     private static final Logger LOGGER = Utils.getLogger(BaseScreenHandler.class.getName());
 
+    ObservableList<Label> errorTopText= FXCollections.observableArrayList();
     private Scene scene;
     private BaseScreenHandler prev;
     protected final Stage stage;
@@ -82,6 +82,12 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
 
     public BaseScreenHandler getPreviousScreen() {
         return this.prev;
+    }
+    void addOservable(Label a){
+        errorTopText.add(a);
+    }
+    void update(){
+        errorTopText.notify();
     }
     public void show() {
         if (this.scene == null) {

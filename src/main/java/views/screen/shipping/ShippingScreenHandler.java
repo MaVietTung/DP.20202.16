@@ -3,7 +3,6 @@ package views.screen.shipping;
 import common.exception.InvalidDeliveryInfoException;
 import controller.PlaceOrderController;
 import entity.invoice.Invoice;
-import entity.order.OderInterface;
 import entity.order.Order;
 import entity.shipping.DeliveryInfo;
 import entity.shipping.ShippingConfigs;

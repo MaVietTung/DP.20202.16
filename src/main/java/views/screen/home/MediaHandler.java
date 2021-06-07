@@ -26,7 +26,9 @@ import views.screen.ViewsConfig;
 import views.screen.popup.PopupScreen;
 
 
-public class MediaHandler extends FXMLScreenHandler implements Observable {
+public class MediaHandler extends FXMLScreenHandler {
+    @FXML
+    private Label errorText;
     @FXML
     protected ImageView mediaImage;
 

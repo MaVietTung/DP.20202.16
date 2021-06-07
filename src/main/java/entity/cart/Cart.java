@@ -13,7 +13,7 @@ import javafx.collections.ObservableList;
 // Singleton: Su dung mau thiet ke Singleton boi vi trong he thon chi can mot the hien cua Cart
 //SOLID: vi phạm SRP tồn tại nhiều hơn 1 lý do để thay đổi: ví dụ khi thay đổi cách tính giá
 //Functional Cohesion: Cac phuong thuc deu thuc hien cung mot muc dich co quan he mat thiet voi nhau
-// Clean code: ten bien cm doi thanh cartIteam, lstItem -> cartItems do list
+// Clean code: ten bien cm doi thanh cartIteam, lstItem -> lstCartItem do list
 public class Cart {
     private static Cart instance;
 
@@ -29,11 +29,11 @@ public class Cart {
     }
 
     public void addCartMedia(CartItem cartItem){
-        cartItems.add(cartItem);
+        lstCartItem.add(cartItem);
     }
 
     public void removeCartMedia(CartItem cartItem){
-        cartItems.remove(cartItem);
+        lstCartItem.remove(cartItem);
     }
 
     public ObservableList<CartItem> getListMedia(){
@@ -41,12 +41,12 @@ public class Cart {
     }
 
     public void emptyCart(){
-        cartItems.clear();
+        lstCartItem.clear();
     }
 
     public int getTotalMedia(){
         int total = 0;
-        for (Object obj : cartItems) {
+        for (Object obj : lstCartItem) {
             CartItem cartItem = (CartItem) obj;
             total += cartItem.getQuantity();
         }
@@ -55,7 +55,7 @@ public class Cart {
 
     public int calSubtotal(){
         int total = 0;
-        for (Object obj : cartItems) {
+        for (Object obj : lstCartItem) {
             CartItem cartItem = (CartItem) obj;
             total += cartItem.getPrice()*cartItem.getQuantity();
         }
@@ -64,7 +64,7 @@ public class Cart {
 
     public void checkAvailabilityOfProduct() throws SQLException{
         boolean allAvailable = true;
-        for (Object object : cartItems) {
+        for (Object object : lstCartItem) {
             CartItem cartItem = (CartItem) object;
             int requiredQuantity = cartItem.getQuantity();
             int availQuantity = cartItem.getMedia().getQuantity();
@@ -75,7 +75,7 @@ public class Cart {
 
     //Control coupling: do tham số đầu vào là media thay doi thi luong phuong thuc thay doi theo
     public CartItem checkMediaInCart(Media media){
-        for (CartItem cartItem : cartItems) {
+        for (CartItem cartItem : lstCartItem) {
             if (cartItem.getMedia().getId() == media.getId()) return cartItem;
         }
         return null;

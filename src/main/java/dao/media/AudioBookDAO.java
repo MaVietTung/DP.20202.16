@@ -36,7 +36,7 @@ public class AudioBookDAO extends MediaDAO{
             String category = res.getString("category");
             int quantity = res.getInt("quantity");
 
-            // from AudioBook table
+            // from Book table
             String author = res.getString("author");
             String format = res.getString("format");
             String language = res.getString("language");
