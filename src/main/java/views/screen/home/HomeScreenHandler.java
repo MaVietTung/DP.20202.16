@@ -80,8 +80,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
     public HomeController getBController() {
         return (HomeController) super.getBController();
     }
-
-
+    
     @Override
     protected void setupData() throws Exception {
         setBController(new HomeController());
@@ -126,14 +125,6 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
         addMenuItem(0, "Book", splitMenuBtnSearch);
         addMenuItem(1, "DVD", splitMenuBtnSearch);
         addMenuItem(2, "CD", splitMenuBtnSearch);
-    }
-
-    public Label getNumMediaCartLabel(){
-        return this.numMediaInCart;
-    }
-
-    public HomeController getBController() {
-        return (HomeController) super.getBController();
     }
 
     @Override
@@ -211,7 +202,6 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
         menuButton.getItems().add(position, menuItem);
     }
 
-
     @Override
     public void addToCartClick(Media media, int requestQuantity) {
         System.out.println("click roi "+ requestQuantity);
@@ -219,7 +209,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
             if (requestQuantity > media.getQuantity()) throw new MediaNotAvailableException();
             Cart cart = SessionInformation.getInstance().cartInstance;
             // if media already in cart then we will increase the quantity by 1 instead of create the new cartMedia
-            CartItem mediaInCart = getBController().checkMediaInCart(media);
+            CartItem mediaInCart = getBController().checkMediaInCart(media.getId());
             if (mediaInCart != null) {
                 mediaInCart.setQuantity(mediaInCart.getQuantity() + 1);
             } else {

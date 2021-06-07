@@ -14,12 +14,11 @@ public class BaseController {
     
     /**
      * The method checks whether the Media in Cart, if it were in, we will return the CartMedia else return null
-     * @param media
      * @return CartMedia or null
      */
 
-    public CartItem checkMediaInCart(Media media){
-        return SessionInformation.getInstance().cartInstance.checkMediaInCart(media);
+    public CartItem checkMediaInCart(int id){
+        return SessionInformation.getInstance().cartInstance.checkMediaInCart(id);
     }
 
     /**

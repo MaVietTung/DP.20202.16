@@ -74,11 +74,10 @@ public class Cart {
     }
 
     //Control coupling: do tham số đầu vào là media thay doi thi luong phuong thuc thay doi theo
-    public CartItem checkMediaInCart(Media media){
+    public CartItem checkMediaInCart(int id){
         for (CartItem cartItem : lstCartItem) {
-            if (cartItem.getMedia().getId() == media.getId()) return cartItem;
+            if (cartItem.getMedia().getId() == id) return cartItem;
         }
         return null;
     }
-
 }
