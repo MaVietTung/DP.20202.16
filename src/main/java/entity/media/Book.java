@@ -109,7 +109,7 @@ public class Book extends Media {
                 " id='" + id + "'" +
                 ", title='" + title + "'" +
                 ", category='" + category + "'" +
-                ", price='" + price + "'" +
+                ", price='" + priceDisplay + "'" +
                 ", quantity='" + quantity + "'" +
                 ", type='" + type + "'" +
                 ", imageURL='" + imageURL + "'" +

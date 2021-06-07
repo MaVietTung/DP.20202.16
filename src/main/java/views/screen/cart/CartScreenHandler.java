@@ -12,6 +12,7 @@ import common.exception.PlaceOrderException;
 import controller.PlaceOrderController;
 import controller.ViewCartController;
 import entity.cart.CartItem;
+import entity.order.OderInterface;
 import entity.order.Order;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -56,17 +57,9 @@ public class CartScreenHandler extends BaseScreenHandler {
 	//Data Coupling
 	public CartScreenHandler(Stage stage, String screenPath) throws IOException {
 		super(stage, screenPath);
-		try {
-			setupFunctionality();
-		} catch (IOException ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error("Error when loading resources.");
-		} catch (Exception ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error(ex.getMessage());
-		}
 	}
 
+    @Override
 	protected void setupFunctionality() throws Exception {
 		// fix relative image path caused by fxml
 		File file = new File(ViewsConfig.IMAGE_PATH + "/Logo.png");
@@ -96,14 +89,27 @@ public class CartScreenHandler extends BaseScreenHandler {
 		return (ViewCartController) super.getBController();
 	}
 
-	public void requestToViewCart(BaseScreenHandler prevScreen) throws SQLException {
+	public void setTemplateMethod(BaseScreenHandler prevScreen){
 		setPreviousScreen(prevScreen);
+	}
+
+
+	public void requestToViewCart(BaseScreenHandler prevScreen) throws SQLException {
+		//setPreviousScreen(prevScreen);
+		setTemplateMethod(prevScreen);
 		setScreenTitle("Cart Screen");
 		getBController().checkAvailabilityOfProduct();
 		displayCartWithMediaAvailability();
 		show();
 	}
-
+	// Clean Code Method: Add new method for get Display Shipping Form
+	private void getDisplaySHippingForm(ShippingScreenHandler shippingScreenHandler,PlaceOrderController placeOrderController){
+		shippingScreenHandler.setPreviousScreen(this);
+		shippingScreenHandler.setHomeScreenHandler(homeScreenHandler);
+		shippingScreenHandler.setScreenTitle("Shipping Screen");
+		shippingScreenHandler.setBController(placeOrderController);
+		shippingScreenHandler.show();
+	}
 	public void requestToPlaceOrder() throws SQLException, IOException {
 		try {
 			// create placeOrderController and process the order
@@ -119,16 +125,12 @@ public class CartScreenHandler extends BaseScreenHandler {
 			displayCartWithMediaAvailability();
 
 			// create order
-			Order order = placeOrderController.createOrder();
+			OderInterface order = placeOrderController.createOrder();
 
 			// display shipping form
 			ShippingScreenHandler shippingScreenHandler = new ShippingScreenHandler(
 					this.stage, ViewsConfig.SHIPPING_SCREEN_PATH, order);
-			shippingScreenHandler.setPreviousScreen(this);
-			shippingScreenHandler.setHomeScreenHandler(homeScreenHandler);
-			shippingScreenHandler.setScreenTitle("Shipping Screen");
-			shippingScreenHandler.setBController(placeOrderController);
-			shippingScreenHandler.show();
+			getDisplaySHippingForm(shippingScreenHandler,placeOrderController);
 
 		} catch (MediaNotAvailableException e) {
 			// if some media are not available then display cart and break usecase Place Order
@@ -166,7 +168,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 				// display the attribute of vboxCart media
 				CartItem cartItem = (CartItem) cm;
-				MediaHandler mediaCartScreen = new MediaHandler(ViewsConfig.CART_MEDIA_PATH, this);
+				CartMediaHandler mediaCartScreen = new CartMediaHandler(ViewsConfig.CART_MEDIA_PATH, this);
 				mediaCartScreen.setCartItem(cartItem);
 
 				// add spinner

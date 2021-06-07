@@ -15,13 +15,13 @@ import java.util.logging.Logger;
 public class Media {
 
     private static Logger LOGGER = Utils.getLogger(Media.class.getName());
-
+//cleancode: dat ten bien khong hop ly dan den can chu thich
     protected Statement stm;
     protected int id;
     protected String title;
     protected String category;
-    protected int value; // the real price of product (eg: 450)
-    protected int price; // the price which will be displayed on browser (eg: 500)
+    protected int realPrice; // the real price of product (eg: 450)
+    protected int priceDisplay; // the price which will be displayed on browser (eg: 500)
     protected int quantity;
     protected String type;
     protected String imageURL;
@@ -35,7 +35,7 @@ public class Media {
         this.id = id;
         this.title = title;
         this.category = category;
-        this.price = price;
+        this.priceDisplay = price;
         this.quantity = quantity;
         this.type = type;
     }
@@ -80,11 +80,11 @@ public class Media {
     }
 
     public int getPrice() {
-        return this.price;
+        return this.priceDisplay;
     }
     //Data COupling: DUng tham so de thuc hien luong thuc thi
     public Media setPrice(int price) {
-        this.price = price;
+        this.priceDisplay = price;
         return this;
     }
 

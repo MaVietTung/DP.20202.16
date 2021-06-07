@@ -14,7 +14,7 @@ import java.util.List;
 //SOLID: Vi phạm DIP, COP vì phụ thuộc trực tiếp vào DeliveryInfo: khi có phương thức tính khoảng cách mới sẽ phải sửa lại code
 //cần có lớp Abstract ADelivery
 //Communicational Cohesion: Cac phuong thuc co su dung cac thuoc tinh chung de thuc hien luong thuc thi cua minh
-public class Order {
+public class Order implements OderInterface {
 
     private int shippingFees;
     private int subtotal;
@@ -31,7 +31,7 @@ public class Order {
     //Stamp coupling do truyền Card nhưng chỉ dụng phương thức calSubtotal
     public Order(Cart cart) {
         List<OrderItem> orderItems = new ArrayList<>();
-        for (Object object : SessionInformation.cartInstance.getListMedia()) {
+        for (Object object : SessionInformation.getInstance().cartInstance.getListMedia()) {
             CartItem cartItem = (CartItem) object;
             OrderItem orderItem = new OrderItem(cartItem.getMedia(),
                     cartItem.getQuantity(),
@@ -59,10 +59,6 @@ public class Order {
     public void setDeliveryInfo(DeliveryInfo deliveryInfo) {
         this.deliveryInfo = deliveryInfo;
         this.shippingFees = deliveryInfo.calculateShippingFee(this);
-    }
-
-    public List getOrderMediaList() {
-        return orderMediaList;
     }
 
     public int getSubtotal() {

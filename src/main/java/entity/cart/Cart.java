@@ -5,18 +5,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import common.exception.MediaNotAvailableException;
+import common.interfaces.Observable;
 import entity.media.Media;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-//Singleton: sử dùng singleton partern vì yêu cầu nghiệp vụ chỉ có duy nhất 1 thể hiện của cart
+// Singleton: Su dung mau thiet ke Singleton boi vi trong he thon chi can mot the hien cua Cart
 //SOLID: vi phạm SRP tồn tại nhiều hơn 1 lý do để thay đổi: ví dụ khi thay đổi cách tính giá
 //Functional Cohesion: Cac phuong thuc deu thuc hien cung mot muc dich co quan he mat thiet voi nhau
+// Clean code: ten bien cm doi thanh cartIteam, lstItem -> cartItems do list
 public class Cart {
     private static Cart instance;
 
-    private List<CartItem> lstCartItem;
+    ObservableList<CartItem> lstCartItem =  FXCollections.observableArrayList();
 
     private Cart() {
-        lstCartItem = new ArrayList<>();
+        lstCartItem.addAll(new ArrayList<>()) ;
     }
 
     public static Cart getInstance(){
@@ -24,43 +28,43 @@ public class Cart {
         return instance;
     }
 
-    public void addCartMedia(CartItem cm){
-        lstCartItem.add(cm);
+    public void addCartMedia(CartItem cartItem){
+        cartItems.add(cartItem);
     }
 
-    public void removeCartMedia(CartItem cm){
-        lstCartItem.remove(cm);
+    public void removeCartMedia(CartItem cartItem){
+        cartItems.remove(cartItem);
     }
 
-    public List getListMedia(){
+    public ObservableList<CartItem> getListMedia(){
         return lstCartItem;
     }
 
     public void emptyCart(){
-        lstCartItem.clear();
+        cartItems.clear();
     }
 
     public int getTotalMedia(){
         int total = 0;
-        for (Object obj : lstCartItem) {
-            CartItem cm = (CartItem) obj;
-            total += cm.getQuantity();
+        for (Object obj : cartItems) {
+            CartItem cartItem = (CartItem) obj;
+            total += cartItem.getQuantity();
         }
         return total;
     }
 
     public int calSubtotal(){
         int total = 0;
-        for (Object obj : lstCartItem) {
-            CartItem cm = (CartItem) obj;
-            total += cm.getPrice()*cm.getQuantity();
+        for (Object obj : cartItems) {
+            CartItem cartItem = (CartItem) obj;
+            total += cartItem.getPrice()*cartItem.getQuantity();
         }
         return total;
     }
 
     public void checkAvailabilityOfProduct() throws SQLException{
         boolean allAvailable = true;
-        for (Object object : lstCartItem) {
+        for (Object object : cartItems) {
             CartItem cartItem = (CartItem) object;
             int requiredQuantity = cartItem.getQuantity();
             int availQuantity = cartItem.getMedia().getQuantity();
@@ -71,7 +75,7 @@ public class Cart {
 
     //Control coupling: do tham số đầu vào là media thay doi thi luong phuong thuc thay doi theo
     public CartItem checkMediaInCart(Media media){
-        for (CartItem cartItem : lstCartItem) {
+        for (CartItem cartItem : cartItems) {
             if (cartItem.getMedia().getId() == media.getId()) return cartItem;
         }
         return null;

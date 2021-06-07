@@ -9,6 +9,7 @@ import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
 import entity.cart.Cart;
 import entity.payment.CreditCard;
+import entity.payment.PaymentCard;
 import entity.payment.PaymentTransaction;
 import subsystem.InterbankInterface;
 import subsystem.InterbankSubsystem;
@@ -24,48 +25,37 @@ import utils.TimeUtil;
  * @author hieud
  *
  */
-//SOLID: Vi pham DIP do phu thuoc cac thong tin cua SessionInfomation
 public class PaymentController extends BaseController {
 
 	/**
 	 * Represent the card used for payment
 	 */
-	private CreditCard card;
+	private PaymentCard card;
 
 	/**
 	 * Represent the Interbank subsystem
 	 */
 	private InterbankInterface interbank;
-
-
+  
+	public PaymentController(InterbankInterface interbankInterface){
+		this.interbank = interbankInterface;
+	}
 
 	/**
 	 * Pay order, and then return the result with a message.
 	 * 
 	 * @param amount         - the amount to pay
 	 * @param contents       - the transaction contents
-	 * @param cardNumber     - the card number
-	 * @param cardHolderName - the card holder name
-	 * @param expirationDate - the expiration date in the format "mm/yy"
-	 * @param securityCode   - the cvv/cvc code of the credit card
 	 * @return {@link Map Map} represent the payment result with a
 	 *         message.
 	 */
 	//Data Coupling: Truyen vao cac tham so va phuc vu luong thuc thi
-	public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
-			String expirationDate, String securityCode) {
+	public Map<String, String> payOrder(int amount, String contents, PaymentCard paymentCard) {
 		Map<String, String> result = new Hashtable<String, String>();
 		result.put("RESULT", "PAYMENT FAILED!");
 		try {
-			this.card = new CreditCard(
-					cardNumber,
-					cardHolderName,
-					TimeUtil.getExpirationDate(expirationDate),
-					Integer.parseInt(securityCode));
-
-			this.interbank = new InterbankSubsystem();
-			PaymentTransaction transaction = interbank.payOrder(card, amount, contents);
-
+            this.card = paymentCard;
+			PaymentTransaction transaction = interbank.payOrder(paymentCard, amount, contents);
 			result.put("RESULT", "PAYMENT SUCCESSFUL!");
 			result.put("MESSAGE", "You have successfully paid the order!");
 		} catch (PaymentException | UnrecognizedException ex) {
@@ -75,6 +65,6 @@ public class PaymentController extends BaseController {
 	}
 
 	public void emptyCart(){
-        SessionInformation.cartInstance.emptyCart();
+        SessionInformation.getInstance().cartInstance.emptyCart();
     }
 }

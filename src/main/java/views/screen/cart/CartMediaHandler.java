@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import common.exception.MediaUpdateException;
 import common.exception.ViewCartException;
 import controller.SessionInformation;
-import entity.cart.Cart;
 import entity.cart.CartItem;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -25,9 +24,9 @@ import utils.Utils;
 import views.screen.FXMLScreenHandler;
 import views.screen.ViewsConfig;
 
-public class MediaHandler extends FXMLScreenHandler {
+public class CartMediaHandler extends FXMLScreenHandler {
 
-	private static Logger LOGGER = Utils.getLogger(MediaHandler.class.getName());
+	private static Logger LOGGER = Utils.getLogger(CartMediaHandler.class.getName());
 
 	@FXML
 	protected HBox hboxMedia;
@@ -60,7 +59,7 @@ public class MediaHandler extends FXMLScreenHandler {
 	private Spinner<Integer> spinner;
 	private CartScreenHandler cartScreen;
 	//Data Coupling
-	public MediaHandler(String screenPath, CartScreenHandler cartScreen) throws IOException {
+	public CartMediaHandler(String screenPath, CartScreenHandler cartScreen) throws IOException {
 		super(screenPath);
 		this.cartScreen = cartScreen;
 		hboxMedia.setAlignment(Pos.CENTER);
@@ -85,7 +84,7 @@ public class MediaHandler extends FXMLScreenHandler {
 		btnDelete.setFont(ViewsConfig.REGULAR_FONT);
 		btnDelete.setOnMouseClicked(e -> {
 			try {
-				SessionInformation.cartInstance.removeCartMedia(cartItem); // update user cart
+				SessionInformation.getInstance().cartInstance.removeCartMedia(cartItem); // update user cart
 				cartScreen.updateCart(); // re-display user cart
 				LOGGER.info("Deleted " + cartItem.getMedia().getTitle() + " from the cart");
 			} catch (SQLException exp) {
