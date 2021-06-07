@@ -69,7 +69,7 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
     protected void setupFunctionality() throws Exception {};
 
     protected void notifyError(Exception ex) throws IOException {
-        PopupScreen.error(ex.getMessage());
+        errorNotifier.notify(ex.getMessage());
     }
 
     public void setErrorNotifier(ErrorNotifier errorNotifier) {
