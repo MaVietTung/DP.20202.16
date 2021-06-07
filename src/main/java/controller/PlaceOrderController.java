@@ -26,7 +26,7 @@ import static utils.ValidateUtils.validateDeliveryInfo;
 // SOLID: VI PHAM NGUYEN LY SRP: Do có nhieu phuong thuc khong dam bao tinh dong goi do co nhieu nhiem vụ
 
 // Concidental cohesion: co nhieu phuong thuc ma muc dich duoc su dung khong lien he mat thiet voi nhau
-
+//CLEAN CLASS: class controller chứa các phương thức validate
 public class PlaceOrderController extends BaseController {
 
     /**
@@ -70,7 +70,7 @@ public class PlaceOrderController extends BaseController {
     public DeliveryInfo processDeliveryInfo(HashMap info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         LOGGER.info("Process Delivery Info");
         LOGGER.info(info.toString());
-        validateDeliveryInfo(info);
+        ValidateUtil.validateDeliveryInfo(info);
         DeliveryInfo deliveryInfo = new DeliveryInfo(
                 String.valueOf(info.get("name")),
                 String.valueOf(info.get("phone")),
