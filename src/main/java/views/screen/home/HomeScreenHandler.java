@@ -69,9 +69,18 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
     private List homeItems;
     private AuthenticationController authenticationController;
 
-    public HomeScreenHandler(Stage stage, String screenPath) throws IOException{
-        super(stage, screenPath);
+    public HomeScreenHandler(Stage stage, String screenPath) throws IOException {
+        super(stage, screenPath, null);
     }
+
+    public Label getNumMediaCartLabel() {
+        return this.numMediaInCart;
+    }
+
+    public HomeController getBController() {
+        return (HomeController) super.getBController();
+    }
+
 
     @Override
     protected void setupData() throws Exception {
@@ -93,6 +102,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
             e.printStackTrace();
         }
     }
+
 
     @Override
     protected void setupFunctionality() throws Exception {

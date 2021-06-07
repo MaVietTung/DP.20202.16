@@ -76,6 +76,7 @@ public class PaymentScreenHandler extends BaseScreenHandler {
 				System.out.println(exp.getStackTrace());
 			}
 		});
+
         methodCreditCart.setOnMouseClicked(e -> {
         });
 	}
@@ -93,8 +94,7 @@ public class PaymentScreenHandler extends BaseScreenHandler {
 	void confirmToPayOrder() throws IOException{
 		String contents = "pay order";
 		PaymentController ctrl = (PaymentController) getBController();
-        Map<String, String> response = ctrl.payOrder(invoice.getAmount(), contents, inputScreenHandler.getPaymentCard());
-
+    Map<String, String> response = ctrl.payOrder(invoice.getAmount(), contents, inputScreenHandler.getPaymentCard());
 		BaseScreenHandler resultScreen = new ResultScreenHandler(this.stage, ViewsConfig.RESULT_SCREEN_PATH, response);
 		resultScreen.setPreviousScreen(this);
 		resultScreen.setHomeScreenHandler(homeScreenHandler);
