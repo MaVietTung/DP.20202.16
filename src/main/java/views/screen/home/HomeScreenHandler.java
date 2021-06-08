@@ -140,7 +140,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
             //btnListOrder.setOnMouseClicked(event -> {(event -> {redirectOderScreen(event)});
         }
 
-        numMediaInCart.setText(String.valueOf(SessionInformation.getInstance().cartInstance.getListMedia().size()) + " media");
+        numMediaInCart.setText(String.valueOf(SessionInformation.getInstance().getCartInstance().getListMedia().size()) + " media");
         super.show();
     }
 
@@ -210,7 +210,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
         System.out.println("click roi "+ requestQuantity);
         try {
             if (requestQuantity > media.getQuantity()) throw new MediaNotAvailableException();
-            Cart cart = SessionInformation.getInstance().cartInstance;
+            Cart cart = SessionInformation.getInstance().getCartInstance();
             // if media already in cart then we will increase the quantity by 1 instead of create the new cartMedia
             CartItem mediaInCart = getBController().checkMediaInCart(media.getId());
             if (mediaInCart != null) {

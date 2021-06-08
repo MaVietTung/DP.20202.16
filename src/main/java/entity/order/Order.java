@@ -31,7 +31,7 @@ public class Order implements OrderInterface{
     //Stamp coupling do truyền Card nhưng chỉ dụng phương thức calSubtotal
     public Order(Cart cart) {
         List<OrderItem> orderItems = new ArrayList<>();
-        for (Object object : SessionInformation.getInstance().cartInstance.getListMedia()) {
+        for (Object object : SessionInformation.getInstance().getCartInstance().getListMedia()) {
             CartItem cartItem = (CartItem) object;
             OrderItem orderItem = new OrderItem(cartItem.getMedia(),
                     cartItem.getQuantity(),
