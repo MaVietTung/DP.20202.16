@@ -205,7 +205,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
     }
 
     @Override
-    // Conten-Coupling do gọi đến phương thức media.setQuantity làm thày đổi trực tiếp thuộc tính của đối tượng media truyền vào trong phương thức này
+    // Content-Coupling do gọi đến phương thức media.setQuantity làm thày đổi trực tiếp thuộc tính của đối tượng media truyền vào trong phương thức này
     public void addToCartClick(Media media, int requestQuantity) {
         System.out.println("click roi "+ requestQuantity);
         try {
