@@ -1,4 +1,4 @@
-Nhóm 16
+# Nhóm 16
 
 ## Thành viên:
 
@@ -17,3 +17,7 @@ Nhóm 16
 | Nguyễn Bắc Việt   | Thiết kế và cải tiến code theoo requirement 2 và 5,tìm ra các vi phạm SOLID, clean code, Design Concepts    |
 | Nguyễn Văn Vũ     | Thiết kế và cải tiến code theo requirement 3, 4 và 6, tìm ra các vi phạm SOLID, clean code, Design Concepts |
 | Nguyễn Công Vượng | Tìm ra các vi phạm SOLID                                                                                    |
+
+## Video presentation
+
+[![Video presentation](https://img.youtube.com/vi/qTeYvwIsQ-s/0.jpg)](https://youtu.be/qTeYvwIsQ-s)
