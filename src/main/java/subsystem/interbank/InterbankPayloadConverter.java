@@ -14,7 +14,6 @@ import java.util.Map;
 /**
  * @author
  */
-//Coincidental Cohesion: Cac phuong thuc khong lien quan den nhau
 public class InterbankPayloadConverter {
 
     /**
