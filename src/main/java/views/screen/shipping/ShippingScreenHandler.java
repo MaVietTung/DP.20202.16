@@ -89,7 +89,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 		InvoiceScreenHandler.setBController(getBController());
 		InvoiceScreenHandler.show();
 	}
-
+	// Content Coupling: viec gọi oder.setDeliveryInfo làm thày đổi trạng thái của thuộc tính delivery bên class Order
 	public void preprocessDeliveryInfo() throws IOException, InterruptedException {
 		// add info to messages
 		HashMap<String, String> messages = new HashMap<>();
