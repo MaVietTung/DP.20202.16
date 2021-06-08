@@ -30,6 +30,7 @@ import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
 import views.screen.cart.CartScreenHandler;
+import views.screen.order.OderScreenHandler;
 import views.screen.popup.PopupScreen;
 
 
@@ -80,8 +81,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
     public HomeController getBController() {
         return (HomeController) super.getBController();
     }
-
-
+    
     @Override
     protected void setupData() throws Exception {
         setBController(new HomeController());
@@ -128,14 +128,6 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
         addMenuItem(2, "CD", splitMenuBtnSearch);
     }
 
-    public Label getNumMediaCartLabel(){
-        return this.numMediaInCart;
-    }
-
-    public HomeController getBController() {
-        return (HomeController) super.getBController();
-    }
-
     @Override
     public void show() {
         if (authenticationController.isAnonymousSession()) {
@@ -145,9 +137,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
             btnLogin.setText("User");
             btnLogin.setOnMouseClicked(event -> {
             });
+            //btnListOrder.setOnMouseClicked(event -> {(event -> {redirectOderScreen(event)});
         }
 
-        numMediaInCart.setText(String.valueOf(SessionInformation.getInstance().cartInstance.getListMedia().size()) + " media");
+        numMediaInCart.setText(String.valueOf(SessionInformation.getInstance().getCartInstance().getListMedia().size()) + " media");
         super.show();
     }
 
@@ -211,15 +204,15 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
         menuButton.getItems().add(position, menuItem);
     }
 
-
     @Override
+    // Content-Coupling do gọi đến phương thức media.setQuantity làm thày đổi trực tiếp thuộc tính của đối tượng media truyền vào trong phương thức này
     public void addToCartClick(Media media, int requestQuantity) {
         System.out.println("click roi "+ requestQuantity);
         try {
             if (requestQuantity > media.getQuantity()) throw new MediaNotAvailableException();
-            Cart cart = SessionInformation.getInstance().cartInstance;
+            Cart cart = SessionInformation.getInstance().getCartInstance();
             // if media already in cart then we will increase the quantity by 1 instead of create the new cartMedia
-            CartItem mediaInCart = getBController().checkMediaInCart(media);
+            CartItem mediaInCart = getBController().checkMediaInCart(media.getId());
             if (mediaInCart != null) {
                 mediaInCart.setQuantity(mediaInCart.getQuantity() + 1);
             } else {
@@ -253,6 +246,21 @@ public class HomeScreenHandler extends BaseScreenHandler implements HandlerClick
             loginScreen.setHomeScreenHandler(this);
             loginScreen.setBController(this.authenticationController);
             loginScreen.show();
+        } catch (Exception ex) {
+            try {
+                PopupScreen.error("Cant trigger Login");
+            } catch (Exception ex1) {
+                LOGGER.severe("Cannot login");
+                ex.printStackTrace();
+            }
+        }
+    }
+    private void redirectOderListScreen(MouseEvent event) {
+        try {
+            BaseScreenHandler oderScreen = new OderScreenHandler(this.stage, ViewsConfig.ORDER_SCREEN_PATH);
+            oderScreen.setHomeScreenHandler(this);
+            oderScreen.setBController(this.authenticationController);
+            oderScreen.show();
         } catch (Exception ex) {
             try {
                 PopupScreen.error("Cant trigger Login");
